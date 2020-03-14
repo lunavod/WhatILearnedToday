@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  /* color: blue; */
+  color: #5757ff;
+  font-weight: bold;
+}
+
+.logo div {
+  line-height: 1em;
+}
