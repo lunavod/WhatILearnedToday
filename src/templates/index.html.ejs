@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <title>Blog</title>
+    <meta charser="utf-8" />
+    <script src="/dist/bundle.js"></script>
+  </head>
+  <body>
+    <div id="react_container"><%= dehydratedContent %></div>
+  </body>
+  <script>
+    const initialState = <%= dehydratedState %>
+    window.hydrateApp(initialState)
+  </script>
+</html>

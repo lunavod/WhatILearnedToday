@@ -1,0 +1,45 @@
+{
+  "name": "blogfront",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lintjs": "eslint . --ext js --ext jsx",
+    "lintcss": "stylelint ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.8.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-css-modules": "^2.11.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-lodash": "^6.0.0",
+    "eslint-plugin-no-use-extend-native": "^0.4.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-sonarjs": "^0.5.0",
+    "nodemon": "^2.0.2",
+    "source-map-support": "^0.5.16",
+    "stylelint": "^13.2.1",
+    "stylelint-config-css-modules": "^2.2.0",
+    "stylelint-config-recommended": "^3.0.0",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "baobab": "^2.6.0",
+    "baobab-react": "^4.0.1",
+    "ejs-loader": "^0.3.5",
+    "express": "^4.17.1",
+    "lodash": "^4.17.15",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  }
+}

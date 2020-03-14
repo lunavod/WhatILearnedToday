@@ -1,0 +1,77 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:css-modules/recommended",
+    "plugin:lodash/recommended",
+    "plugin:sonarjs/recommended",
+    "plugin:import/warnings",
+    "plugin:promise/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "modules": true,
+      "jsx": true
+    },
+    "modules": true,
+    "experimentalObjectRestSpread": true,
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "babel",
+    "react",
+    "css-modules",
+    "lodash",
+    "sonarjs",
+    "promise",
+    "no-use-extend-native"
+  ],
+  "rules": {
+    "indent": [
+      "error",
+      "tab",
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-console": "off",
+    "max-len": [
+      2,
+      120
+    ],
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "lodash/import-scope": [
+      2,
+      "member"
+    ]
+  },
+  "parser": "babel-eslint",
+  "settings": {
+    "import/parser": "babel-eslint",
+    "import/resolve": {
+      "moduleDirectory": [
+        "node_modules",
+        "src"
+      ]
+    },
+    "react": {
+      "version": "16"
+    }
+  },
+  "globals": {}
+}
