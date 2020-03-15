@@ -1,10 +1,15 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
-import syles from './styles.css'
+import styles from './styles.css'
 
 export default function Post({ post }) {
-  return <Fragment>Hello, Post!</Fragment>
+  return (
+    <div styleName="post">
+      {post.title ? <header>{post.title}</header> : ''}
+      {post.text ? <div styleName="content">{post.text}</div> : ''}
+    </div>
+  )
 }
 
 Post.propTypes = {

@@ -6,6 +6,8 @@ body {
 
 :root {
   --font-family: 'IBM Plex Sans', sans-serif;
+  --brand: #5757ff;
+  --accent: #ffd324;
 }
 
 * {

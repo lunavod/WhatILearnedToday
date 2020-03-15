@@ -2,16 +2,22 @@ import React, { Fragment } from 'react'
 import { useBranch } from 'baobab-react/hooks'
 import AddPost from '../../components/AddPost'
 import Posts from '../../components/Posts'
-import { getPosts } from '../../api'
+import { getPosts, addPost } from '../../api'
 
 import syles from './styles.css'
 
 export function Controller() {
-  const {} = useBranch({})
+  const { dispatch } = useBranch({})
+
+  const publish = async (title, text) => {
+    await addPost(title, text)
+    const newPosts = (await getPosts()).posts
+    dispatch(tree => tree.select('posts').set(newPosts))
+  }
 
   return (
     <Fragment>
-      <AddPost />
+      <AddPost onSubmit={publish} />
       <Posts />
     </Fragment>
   )

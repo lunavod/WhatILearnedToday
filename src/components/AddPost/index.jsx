@@ -1,17 +1,15 @@
 import React, { Fragment, useState } from 'react'
-import { addPost } from '../../api'
 
 import syles from './styles.css'
 
-export default function AddPost() {
+export default function AddPost({ onSubmit }) {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
 
   const publish = () => {
-    addPost(title, text).then(() => {
-      setTitle('')
-      setText('')
-    })
+    onSubmit(title, text)
+    setTitle('')
+    setText('')
   }
 
   return (

@@ -5,7 +5,7 @@
 
 .logo {
   /* color: blue; */
-  color: #5757ff;
+  color: var(--brand);
   font-weight: bold;
 }
 

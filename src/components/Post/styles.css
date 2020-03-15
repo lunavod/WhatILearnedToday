@@ -1,0 +1,17 @@
+.post {
+  display: block;
+  color: white;
+  background: var(--brand);
+  padding: 16px;
+  border-radius: 15px;
+  margin-bottom: 32px;
+  box-shadow: 0 3px 8px var(--brand);
+}
+
+.post header {
+  font-size: 1.4em;
+}
+
+.content {
+  padding-top: 8px;
+}

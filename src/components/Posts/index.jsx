@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
 import { useBranch } from 'baobab-react/hooks'
-import {} from 'lodash'
+import Post from '../Post'
 
 import syles from './styles.css'
 
@@ -13,14 +13,9 @@ export default function Posts() {
 
   return (
     <Fragment>
-      {posts.map(post => {
-        return (
-          <div key={post.id}>
-            <span>{post.title}</span>
-            <p>{post.text}</p>
-          </div>
-        )
-      })}
+      {posts.map(post => (
+        <Post post={post} key={`post_${post.id}`} />
+      ))}
     </Fragment>
   )
 }

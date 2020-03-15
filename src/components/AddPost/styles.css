@@ -14,7 +14,7 @@
   padding: 8px 16px;
   font-size: 1.5em;
   border-bottom: 1px solid transparent;
-  transition: border-color .2s;
+  transition: border-color 0.2s;
 }
 
 .title:focus {
@@ -49,12 +49,12 @@
 }
 
 .actions button.secondary {
-  background: #ffd324;
-  box-shadow: 0 2px 8px #ffd324;
+  background: var(--accent);
+  box-shadow: 0 2px 8px var(--accent);
 }
 
 .actions button.primary {
-  background-color: #5757ff;
+  background-color: var(--brand);
   color: white;
-  box-shadow: 0 2px 8px #5757ff;
+  box-shadow: 0 2px 8px var(--brand);
 }
