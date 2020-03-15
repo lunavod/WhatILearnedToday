@@ -4,7 +4,10 @@ import Baobab from 'baobab'
 
 import App from './components/App'
 
-window.hydrateApp = (initialState) => {
+window.hydrateApp = initialState => {
   const tree = new Baobab(initialState)
-  ReactDOM.hydrate(<App store={tree} />, document.querySelector('#react_container'))
+  ReactDOM.hydrate(
+    <App store={tree} />,
+    document.querySelector('#react_container')
+  )
 }

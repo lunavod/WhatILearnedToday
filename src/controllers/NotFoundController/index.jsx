@@ -1,9 +1,9 @@
-import React, {Fragment} from 'react'
+import React, { Fragment } from 'react'
 
-import syles from "./styles.css"
+import syles from './styles.css'
 
 export function Controller() {
-    return <Fragment>Hello, NotFoundController!</Fragment>
+  return <Fragment>Hello, NotFoundController!</Fragment>
 }
 
 export async function loadData() {}

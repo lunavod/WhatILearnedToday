@@ -37,7 +37,7 @@
 .actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 32px;
+  margin: 32px 0;
 }
 
 .actions button {

@@ -1,24 +1,24 @@
-import React, {Fragment} from 'react'
+import React, { Fragment } from 'react'
 import { useBranch } from 'baobab-react/hooks'
 import AddPost from '../../components/AddPost'
 import Posts from '../../components/Posts'
-import {getPosts} from '../../api'
+import { getPosts } from '../../api'
 
-import syles from "./styles.css"
+import syles from './styles.css'
 
 export function Controller() {
-    const {  } = useBranch({
-        
-    })
+  const {} = useBranch({})
 
-    return <Fragment>
-        <AddPost />
-        <Posts />
+  return (
+    <Fragment>
+      <AddPost />
+      <Posts />
     </Fragment>
+  )
 }
 
 export async function loadData(tree) {
-    const posts = (await getPosts()).posts
-    tree.select('posts').set(posts)
-    return true
+  const posts = (await getPosts()).posts
+  tree.select('posts').set(posts)
+  return true
 }

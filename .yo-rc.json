@@ -1,9 +1,9 @@
 {
   "generator-codestyle": {
     "codestyle": {
-      "indent": "tab",
-      "semi": true,
-      "quotes": "double"
+      "indent": 4,
+      "semi": false,
+      "quotes": "single"
     }
   }
 }

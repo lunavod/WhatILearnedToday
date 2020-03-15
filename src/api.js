@@ -13,14 +13,14 @@ async function post(url, data) {
 
 async function get(url, data) {
   const response = await fetch(url, {
-    method: 'GET',
+    method: 'GET'
   })
 
   return await response.json()
 }
 
 export async function addPost(title, text) {
-  return await post('http://localhost:9999/posts', {post: {title, text}})
+  return await post('http://localhost:9999/posts', { post: { title, text } })
 }
 
 export async function getPosts() {

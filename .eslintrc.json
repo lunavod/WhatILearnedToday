@@ -9,7 +9,6 @@
     "plugin:react/recommended",
     "plugin:css-modules/recommended",
     "plugin:lodash/recommended",
-    "plugin:sonarjs/recommended",
     "plugin:import/warnings",
     "plugin:promise/recommended"
   ],
@@ -28,25 +27,23 @@
     "react",
     "css-modules",
     "lodash",
-    "sonarjs",
-    "promise",
-    "no-use-extend-native"
+    "promise"
   ],
   "rules": {
     "indent": [
       "error",
-      "tab",
+      4,
       {
         "SwitchCase": 1
       }
     ],
     "quotes": [
       "error",
-      "double"
+      "single"
     ],
     "semi": [
       "error",
-      "always"
+      "never"
     ],
     "no-console": "off",
     "max-len": [
