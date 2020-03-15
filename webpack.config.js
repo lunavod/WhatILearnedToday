@@ -47,10 +47,12 @@ const client = {
 const server = {
   mode: 'development',
   target: 'node',
-  entry: path.resolve(__dirname, 'index.js'),
+  entry: path.resolve(__dirname, 'src/serverIndex.js'),
   output: {
-    filename: 'server.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: 'serverBundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    library: 'serverBundle',
+    libraryTarget: 'commonjs2'
   },
   module: {
     rules: [
@@ -90,7 +92,8 @@ const server = {
       exclude: /.+\.css/gm
     }),
     new webpack.ProvidePlugin({
-        _: "lodash"
+        _: "lodash",
+        fetch: "node-fetch",
     }),
     new MiniCssExtractPlugin(),
   ],

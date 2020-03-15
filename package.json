@@ -40,10 +40,12 @@
     "babel-plugin-react-css-modules": "^5.2.6",
     "baobab": "^2.6.0",
     "baobab-react": "^4.0.1",
+    "decache": "^4.5.1",
     "ejs-loader": "^0.3.5",
     "express": "^4.17.1",
     "fitty": "^2.3.0",
     "lodash": "^4.17.15",
+    "node-fetch": "^2.6.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "textfit": "github:STRML/textFit"
