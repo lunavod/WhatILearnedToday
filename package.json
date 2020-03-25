@@ -12,9 +12,13 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
     "eslint-plugin-babel": "^5.3.0",
@@ -38,6 +42,7 @@
   },
   "dependencies": {
     "babel-plugin-react-css-modules": "^5.2.6",
+    "bakaeditor": "github:lunavod/BakaEditor",
     "baobab": "^2.6.0",
     "baobab-react": "^4.0.1",
     "decache": "^4.5.1",

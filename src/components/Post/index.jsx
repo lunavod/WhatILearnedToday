@@ -7,7 +7,14 @@ export default function Post({ post }) {
   return (
     <div styleName="post">
       {post.title ? <header>{post.title}</header> : ''}
-      {post.text ? <div styleName="content">{post.text}</div> : ''}
+      {post.text ? (
+        <div
+          styleName="content"
+          dangerouslySetInnerHTML={{ __html: post.text }}
+        />
+      ) : (
+        ''
+      )}
     </div>
   )
 }

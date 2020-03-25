@@ -6,31 +6,21 @@
   border: 1px solid rgba(0, 0, 255, 0.05);
   box-shadow: 0px 5px 24px rgba(0, 0, 255, 0.24);
   margin-top: 8px;
+  background: rgba(0, 0, 255, 0.03);
 }
 
 .title {
   font-family: var(--font-family);
   border: 0;
-  padding: 8px 16px;
+  border-left: 1px solid rgba(0, 0, 255, 0.06);
+  padding: 8px;
   font-size: 1.5em;
-  border-bottom: 1px solid transparent;
+  /* border-bottom: 1px solid transparent; */
   transition: border-color 0.2s;
+  margin-left: 31px;
 }
 
 .title:focus {
-  outline: none;
-}
-
-.text {
-  font-family: var(--font-family);
-  border: 0;
-  padding: 8px 16px;
-  font-size: 16px;
-  resize: none;
-  /* padding-top: 0; */
-}
-
-.text:focus {
   outline: none;
 }
 
@@ -57,4 +47,104 @@
   background-color: var(--brand);
   color: white;
   box-shadow: 0 2px 8px var(--brand);
+}
+
+:root {
+  --button-size: 32px;
+  --editor-padding: 6px;
+  --border-radius: 5px;
+}
+
+:global #wrapper {
+  width: 100%;
+  background: white;
+  border-radius: 0 0 15px 15px;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  position: relative;
+}
+
+:global #buttons {
+  width: var(--button-size);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 255, 0.03);
+  border-right: 1px solid rgba(0, 0, 255, 0.06);
+}
+
+:global #buttons a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--button-size);
+  height: var(--button-size);
+  text-decoration: none;
+  font-size: 1.2em;
+  color: rgba(0, 0, 255, 0.3);
+  transition: color 0.2s;
+}
+
+:global #buttons a.active {
+  /* background: rgba(0, 0, 255, 0.08); */
+  color: #ffd324;
+  /* background: #ffd324; */
+}
+
+:global #buttons #bold {
+  font-weight: bold;
+}
+
+:global #buttons #italic {
+  font-style: italic;
+}
+
+:global #buttons #strike {
+  text-decoration: line-through;
+}
+
+:global #placeholder {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  top: 7px;
+  left: calc(var(--editor-padding) + 2px + var(--button-size));
+  opacity: 0.6;
+  z-index: 0;
+}
+
+:global #placeholder.invisible {
+  opacity: 0;
+}
+
+:global #editor {
+  width: 100%;
+  height: auto;
+  min-height: 150px;
+  padding: calc(var(--editor-padding) - 1px);
+  background: transparent;
+  z-index: 1;
+  border-radius: 0 0 15px 0;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+  font-size: 16px;
+  padding: 8px;
+}
+
+:global #editor * {
+  white-space: pre;
+}
+
+:global #editor:focus {
+  outline: 0px solid transparent;
+  border-color: rgba(0, 0, 255, 0.24);
+}
+
+:global #editor .empty {
+  height: 1em;
+}
+
+:global #editor:active {
+  outline: none;
 }

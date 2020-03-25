@@ -2,6 +2,8 @@ import ReactDOM from 'react-dom'
 import React from 'react'
 import Baobab from 'baobab'
 
+require('./utils/BakaEditor/index.js')
+
 import App from './components/App'
 
 window.hydrateApp = initialState => {

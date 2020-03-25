@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useRef, useEffect } from 'react'
 
 import syles from './styles.css'
 
@@ -10,7 +10,33 @@ export default function AddPost({ onSubmit }) {
     onSubmit(title, text)
     setTitle('')
     setText('')
+
+    let editor = editorRef.current
+    editor.document.delete(0, editor.document.text.length)
+    editor.document.history = []
   }
+
+  const inputRef = useRef(null)
+  const editorRef = useRef(null)
+
+  useEffect(() => {
+    let target = inputRef.current
+
+    const config = {
+      attributes: true
+    }
+
+    const callback = (mutationList, observer) => {
+      for (let mutation of mutationList) {
+        if (mutation.attributeName === 'value') {
+          setText(target.value)
+        }
+      }
+    }
+
+    const observer = new MutationObserver(callback)
+    observer.observe(target, config)
+  })
 
   return (
     <Fragment>
@@ -22,11 +48,16 @@ export default function AddPost({ onSubmit }) {
           value={title}
           onChange={e => setTitle(e.target.value)}
         />
-        <textarea
-          styleName="text"
+        <input
+          type="hidden"
+          id="content"
+          onChange={console.log}
+          ref={inputRef}
+        />
+        <baka-editor
+          ref={editorRef}
           placeholder="Сегодня я точно напишу что-нибудь интересное!"
-          value={text}
-          onChange={e => setText(e.target.value)}
+          output="#content"
         />
       </div>
       <div styleName="actions">
