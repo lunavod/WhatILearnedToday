@@ -1,0 +1,50 @@
+.wrapper {
+  position: relative;
+  padding-top: 0.8em;
+  margin-bottom: 8px;
+}
+
+.placeholder {
+  position: absolute;
+  top: calc(8px + 0.6em);
+  left: 8px;
+  line-height: 1em;
+  transition: font-size 0.2s, top 0.2s;
+}
+
+.input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-bottom: 2px solid lightgray;
+  font-size: 1em;
+  transition: border-color 0.2s;
+}
+
+.wrapper.not_empty .placeholder,
+.wrapper.active .placeholder {
+  font-size: 0.8em;
+  top: 4px;
+  left: 0px;
+}
+
+.wrapper.active .placeholder {
+  color: var(--brand);
+}
+
+.wrapper.active.accent .placeholder {
+  color: var(--accent);
+}
+
+.wrapper.active .input {
+  border-color: var(--brand);
+}
+
+.wrapper.active.accent .input {
+  border-color: var(--accent);
+}
+
+.input:focus {
+  outline: none;
+}

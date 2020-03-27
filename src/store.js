@@ -1,7 +1,24 @@
 import Baobab from 'baobab'
 
 const initialData = {
-  name: 'Uni'
+  currentUser: {
+    id: 0,
+    loggedIn: false
+  },
+  modals: {
+    LoginActions: {
+      isOpen: true,
+      logIn: {
+        username: 'TestUser',
+        password: 'password'
+      },
+      register: {
+        username: '',
+        password: '',
+        email: ''
+      }
+    }
+  }
 }
 
 const tree = new Baobab(initialData)

@@ -1,0 +1,32 @@
+.button {
+  height: 42px;
+  border: 0;
+  padding: 12px 16px;
+  border-radius: calc(42px / 2);
+  font-size: 1em;
+  cursor: pointer;
+  background: var(--brand);
+  color: white;
+}
+
+.button:active,
+.button:focus {
+  outline: none;
+}
+
+.button.shadow {
+  box-shadow: 0 2px 8px var(--brand);
+}
+
+.accent {
+  background: var(--accent);
+  color: #634900;
+}
+
+.accent.shadow {
+  box-shadow: 0 2px 8px var(--accent);
+}
+
+.round {
+  border-radius: 21px;
+}

@@ -6,15 +6,20 @@ import styles from './styles.css'
 export default function Post({ post }) {
   return (
     <div styleName="post">
-      {post.title ? <header>{post.title}</header> : ''}
-      {post.text ? (
-        <div
-          styleName="content"
-          dangerouslySetInnerHTML={{ __html: post.text }}
+      <header>
+        <img
+          styleName="avatar"
+          src="https://skynetgaming.net/uploads/monthly_2020_03/Capture.thumb.PNG.7162eef397706a6f76dc1faf18b414c8.PNG"
         />
-      ) : (
-        ''
-      )}
+        <div styleName="top_info_wrapper">
+          <div styleName="username">NekoLu</div>
+          <div styleName="title">{post.title}</div>
+        </div>
+      </header>
+      <div
+        styleName="content"
+        dangerouslySetInnerHTML={{ __html: post.text }}
+      />
     </div>
   )
 }

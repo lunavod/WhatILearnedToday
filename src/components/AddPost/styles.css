@@ -41,6 +41,7 @@
 .actions button.secondary {
   background: var(--accent);
   box-shadow: 0 2px 8px var(--accent);
+  color: #634900;
 }
 
 .actions button.primary {
@@ -121,7 +122,7 @@
 :global #editor {
   width: 100%;
   height: auto;
-  min-height: 150px;
+  min-height: 140px;
   padding: calc(var(--editor-padding) - 1px);
   background: transparent;
   z-index: 1;

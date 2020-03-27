@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react'
+import Button from '../Button'
 
 import syles from './styles.css'
 
@@ -61,10 +62,12 @@ export default function AddPost({ onSubmit }) {
         />
       </div>
       <div styleName="actions">
-        <button styleName="secondary">Сохранить</button>
-        <button styleName="primary" onClick={publish}>
+        <Button accent shadow>
+          Сохранить
+        </Button>
+        <Button onClick={publish} shadow>
           Опубликовать
-        </button>
+        </Button>
       </div>
     </Fragment>
   )

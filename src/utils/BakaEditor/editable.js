@@ -106,6 +106,7 @@ class Editable extends HTMLElement {
   }
 
   getSelection() {
+    if (window.getSelection().type === 'None') return {}
     let range = window.getSelection().getRangeAt(0)
     let result = {}
     let firstOffset = this.getContainerOffset(range.startContainer)

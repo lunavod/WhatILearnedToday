@@ -1,4 +1,11 @@
 async function post(url, data) {
+  if (globalThis.localStorage) {
+    const api_key = localStorage.getItem('api_key')
+    data = {
+      ...data,
+      api_key
+    }
+  }
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -12,6 +19,13 @@ async function post(url, data) {
 }
 
 async function get(url, data) {
+  if (globalThis.localStorage) {
+    const api_key = localStorage.getItem('api_key')
+    data = {
+      ...data,
+      api_key
+    }
+  }
   const response = await fetch(url, {
     method: 'GET'
   })
@@ -27,4 +41,34 @@ export async function getPosts() {
   return await get('http://localhost:9999/posts')
 }
 
-globalThis.addPost = addPost
+export async function login(username, password) {
+  const resp = await post('http://localhost:9999/sessions', {
+    user: { username, password }
+  })
+
+  console.log(resp)
+
+  if (resp.code !== 200) return resp
+
+  if (globalThis.localStorage) {
+    localStorage.setItem('api_key', resp.result.key)
+    localStorage.setItem('session_id', resp.result.session.id)
+    localStorage.setItem('current_user_id', resp.result.session.user_id)
+  }
+
+  console.log('Login!', resp.result.key)
+
+  return resp
+}
+
+export async function register(username, email, password) {
+  const resp = await post('http://localhost:9999/users', {
+    user: { username, email, password }
+  })
+
+  console.log('Register!', username, email, password, resp)
+
+  if (resp.code !== 201) return resp
+
+  return await login(username, password)
+}

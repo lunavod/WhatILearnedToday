@@ -1,17 +1,44 @@
 .post {
   display: block;
-  color: white;
-  background: var(--brand);
+  color: black;
+  background: white;
   padding: 16px;
   border-radius: 15px;
   margin-bottom: 32px;
-  box-shadow: 0 3px 8px var(--brand);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 .post header {
-  font-size: 1.4em;
+  display: flex;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
 }
 
 .content {
-  padding-top: 8px;
+  padding-top: 16px;
+}
+
+.top_info_wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 38px;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+.username {
+  font-size: 0.9em;
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 1em;
+  font-weight: 500;
+}
+
+.title {
+  font-size: 1.4em;
+  color: var(--brand);
+  line-height: 1em;
 }

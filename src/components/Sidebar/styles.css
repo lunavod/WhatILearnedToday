@@ -12,3 +12,49 @@
 .logo div {
   line-height: 1em;
 }
+
+.anonim_actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.open_login_form {
+  height: 42px;
+  border: 0;
+  border-radius: calc(42px / 2);
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 32px;
+  display: flex;
+  padding: 0;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.open_login_form:focus {
+  outline: none;
+}
+
+.open_login_form .left,
+.open_login_form .right {
+  height: 42px;
+  width: 55%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.open_login_form .left {
+  background: var(--brand);
+  color: white;
+  padding-right: 5%;
+}
+
+.open_login_form .right {
+  width: 55%;
+  background: var(--accent);
+  padding-left: 5%;
+  margin-left: -5%;
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+  color: #634900;
+}
