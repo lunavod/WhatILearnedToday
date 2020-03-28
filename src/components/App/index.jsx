@@ -4,15 +4,15 @@ import AddPost from '../AddPost'
 import Sidebar from '../Sidebar'
 import Posts from '../Posts'
 
-import routing from '../../routing'
+import getRouteForUrl from '../../routing'
 
 import syles from './styles.css'
 
 export default function App({ store, pathname }) {
   if (!pathname) pathname = location.pathname
   const Root = useRoot(store)
-  const controller = routing[pathname] || routing[404]
-  const Page = controller.Controller
+  const route = getRouteForUrl(pathname)
+  const Page = route.Controller
   return (
     <Root>
       <div styleName="wrapper">
@@ -20,7 +20,7 @@ export default function App({ store, pathname }) {
           <Sidebar />
         </div>
         <div styleName="right">
-          <Page />
+          <Page routeData={route.data} />
         </div>
       </div>
     </Root>

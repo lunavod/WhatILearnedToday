@@ -30,3 +30,5 @@ export async function loadData(tree) {
   tree.select('posts').set(posts)
   return true
 }
+
+export const ControllerName = 'IndexController'

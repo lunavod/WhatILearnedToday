@@ -3,18 +3,12 @@ import { useBranch } from 'baobab-react/hooks'
 import LoginActionsModal from '../LoginActionsModal'
 import CurrentUser from '../CurrentUser'
 
-import syles from './styles.css'
+import styles from './styles.css'
 
 import fitty from 'fitty'
 
 export default function Sidebar() {
   const refs = [useRef(), useRef(), useRef()]
-
-  useEffect(() => {
-    fitty(refs[0].current)
-    fitty(refs[1].current)
-    fitty(refs[2].current)
-  })
 
   const { loggedIn, dispatch } = useBranch({
     loggedIn: ['logInData', 'loggedIn']
@@ -40,11 +34,11 @@ export default function Sidebar() {
 
   return (
     <div styleName="wrapper">
-      <div styleName="logo">
-        <div ref={refs[0]}>WHAT I</div>
-        <div ref={refs[1]}>LEARNED</div>
-        <div ref={refs[2]}>TODAY</div>
-      </div>
+      <a href="/" styleName="logo">
+        <div styleName="first_line">WHAT I</div>
+        <div styleName="second_line">LEARNED</div>
+        <div styleName="third_line">TODAY</div>
+      </a>
       {loggedIn ? <CurrentUser /> : logged_items}
     </div>
   )

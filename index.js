@@ -10,19 +10,13 @@ app.use('/dist', express.static('dist'))
 app.use(cookieParser())
 
 app.get('*', async function(req, res) {
-  console.log(
-    chalk.gray(`[${dateFormat(new Date(), 'h:MM:ss')}]`),
-    chalk.blue('GET'),
-    chalk.green(req.originalUrl)
-  )
-
   decache(require.resolve('./dist/serverBundle'))
   decache(require.resolve('react'))
   decache(require.resolve('react-dom/server'))
 
   const ReactDOMServer = require('react-dom/server')
   const React = require('react')
-  const { App, tree, template, routing } = require('./dist/serverBundle')
+  const { App, tree, template, getRouteForUrl } = require('./dist/serverBundle')
 
   const storedCookies = [
     {
@@ -40,10 +34,9 @@ app.get('*', async function(req, res) {
 
   globalThis.api_key = tree.select('logInData', 'api_key').get()
 
-  let controller = routing[req.originalUrl]
-  if (!controller) controller = routing[404]
-  await controller.loadData(tree)
-  await routing.default.loadData(tree)
+  const route = getRouteForUrl(req.originalUrl)
+  await route.loadData(tree)
+  await route.default.loadData(tree)
 
   const dehydratedContent = ReactDOMServer.renderToString(
     React.createElement(App, { store: tree, pathname: req.originalUrl })
@@ -51,6 +44,13 @@ app.get('*', async function(req, res) {
   const dehydratedState = JSON.stringify(tree.get())
 
   res.send(template({ dehydratedContent, dehydratedState }))
+
+  console.log(
+    chalk.gray(`[${dateFormat(new Date(), 'h:MM:ss')}]`),
+    chalk.blue('GET'),
+    chalk.green(req.originalUrl),
+    chalk.blue(route.ControllerName)
+  )
 })
 
 function startServer() {

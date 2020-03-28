@@ -7,10 +7,26 @@
   /* color: blue; */
   color: var(--brand);
   font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .logo div {
   line-height: 1em;
+}
+
+.logo .first_line {
+  font-size: 75px;
+}
+
+.logo .second_line {
+  font-size: 58.7px;
+}
+
+.logo .third_line {
+  font-size: 84px;
 }
 
 .anonim_actions {

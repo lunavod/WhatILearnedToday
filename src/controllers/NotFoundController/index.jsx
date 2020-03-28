@@ -7,3 +7,5 @@ export function Controller() {
 }
 
 export async function loadData() {}
+
+export const ControllerName = 'NotFoundController'
