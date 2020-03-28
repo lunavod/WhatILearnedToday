@@ -5,8 +5,9 @@ import classNames from 'classnames'
 import styles from './styles.css'
 
 export default function CurrentUser() {
-  const { logInData, dispatch } = useBranch({
-    logInData: 'logInData'
+  const { logInData, user, dispatch } = useBranch({
+    logInData: 'logInData',
+    user: 'currentUser'
   })
 
   const [isActive, setIsActive] = useState(false)
@@ -35,7 +36,10 @@ export default function CurrentUser() {
       <img
         onClick={onClick}
         styleName="avatar"
-        src="https://skynetgaming.net/uploads/monthly_2020_03/Capture.thumb.PNG.7162eef397706a6f76dc1faf18b414c8.PNG"
+        src={
+          user.avatar ||
+          'https://skynetgaming.net/uploads/monthly_2020_03/Capture.thumb.PNG.7162eef397706a6f76dc1faf18b414c8.PNG'
+        }
       />
     </div>
   )

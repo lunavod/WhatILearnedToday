@@ -9,8 +9,11 @@ const routing = {
   '404': NotFoundController,
   default: {
     async loadData(tree: any) {
-      if (!tree.select('logInData', 'loggedIn')) return
-      const user = getUser(tree.logInData.id)
+      if (!tree.select('logInData', 'loggedIn')) {
+        console.log('Not logged in! D:')
+        return
+      }
+      const user = await getUser(tree.select('logInData', 'id').get())
       tree.select(['currentUser']).set(user)
     }
   }

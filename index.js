@@ -43,6 +43,7 @@ app.get('*', async function(req, res) {
   let controller = routing[req.originalUrl]
   if (!controller) controller = routing[404]
   await controller.loadData(tree)
+  await routing.default.loadData(tree)
 
   const dehydratedContent = ReactDOMServer.renderToString(
     React.createElement(App, { store: tree, pathname: req.originalUrl })

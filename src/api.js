@@ -2,7 +2,7 @@
 
 declare var globalThis: { api_key: string | void, localStorage: any }
 
-async function post(url: string, data?: any): Promise<any> {
+async function post(url: string, data?: any, signal: any): Promise<any> {
   if (globalThis.api_key) {
     data = {
       ...data,
@@ -16,13 +16,14 @@ async function post(url: string, data?: any): Promise<any> {
       'Content-Type': 'application/json'
     },
     // mode: 'no-cors',
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
+    signal
   })
 
   return await response.json()
 }
 
-async function get(url: string, data?: any): Promise<any> {
+async function get(url: string, data?: any, signal: any): Promise<any> {
   if (globalThis.api_key) {
     data = {
       ...data,
@@ -30,7 +31,8 @@ async function get(url: string, data?: any): Promise<any> {
     }
   }
   const response = await fetch(url, {
-    method: 'GET'
+    method: 'GET',
+    signal
   })
 
   return await response.json()
@@ -82,8 +84,8 @@ export async function register(
   return await login(username, password)
 }
 
-export async function getUser(id: number): Promise<any> {
-  const resp = await get('http://localhost:9999/users/' + id)
+export async function getUser(id: number, signal: any): Promise<any> {
+  const resp = await get('http://localhost:9999/users/' + id, {}, signal)
   if (resp.code !== 200) {
     throw 'NotFound'
   }
