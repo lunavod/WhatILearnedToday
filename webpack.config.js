@@ -2,13 +2,15 @@ const webpack = require('webpack')
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 
 const client = {
   mode: 'development',
   entry: path.resolve(__dirname, 'src/index.js'),
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    chunkFilename: '[name].bundle.js'
   },
   module: {
     rules: [
@@ -52,11 +54,19 @@ const client = {
   devtool: 'source-map',
   plugins: [
     new MiniCssExtractPlugin(),
-    new webpack.DefinePlugin({
-      SERVER_BUILD: false,
-      CLIENT_BUILD: true
-    })
-  ]
+    new webpack.DefinePlugin(
+      {
+        SERVER_BUILD: false,
+        CLIENT_BUILD: true
+      },
+      new LodashModuleReplacementPlugin()
+    )
+  ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
 }
 
 const server = {
@@ -122,10 +132,13 @@ const server = {
       fetch: 'node-fetch'
     }),
     new MiniCssExtractPlugin(),
-    new webpack.DefinePlugin({
-      SERVER_BUILD: true,
-      CLIENT_BUILD: false
-    })
+    new webpack.DefinePlugin(
+      {
+        SERVER_BUILD: true,
+        CLIENT_BUILD: false
+      },
+      new LodashModuleReplacementPlugin()
+    )
   ]
 }
 
