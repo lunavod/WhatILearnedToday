@@ -1,4 +1,5 @@
 import Baobab from 'baobab'
+import registerStored from './utils/BaobabStored'
 
 const initialData = {
   currentUser: {
@@ -7,7 +8,7 @@ const initialData = {
   },
   modals: {
     LoginActions: {
-      isOpen: true,
+      isOpen: false,
       logIn: {
         username: 'TestUser',
         password: 'password'
@@ -22,5 +23,15 @@ const initialData = {
 }
 
 const tree = new Baobab(initialData)
+
+const stored = [
+  {
+    path: ['currentUser'],
+    name: 'current_user',
+    duplicateToCookies: true
+  }
+]
+
+registerStored(stored, tree)
 
 export default tree

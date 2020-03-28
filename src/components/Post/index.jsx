@@ -12,8 +12,8 @@ export default function Post({ post }) {
           src="https://skynetgaming.net/uploads/monthly_2020_03/Capture.thumb.PNG.7162eef397706a6f76dc1faf18b414c8.PNG"
         />
         <div styleName="top_info_wrapper">
-          <div styleName="username">NekoLu</div>
           <div styleName="title">{post.title}</div>
+          <div styleName="username">NekoLu</div>
         </div>
       </header>
       <div

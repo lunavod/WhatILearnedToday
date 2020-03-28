@@ -179,23 +179,13 @@ class BakaEditor extends HTMLElement {
       lastSelection = this.elms.editor.getSelection()
     })
 
-    this.elms.editor.addEventListener('input', e => {
-      if (e.inputType !== 'insertText') return
-
-      e.preventDefault()
-
-      // let range = this.elms.editor.getSelection()
-      let range =
-        lastSelection && !lastSelection.collapsed
-          ? lastSelection
-          : this.elms.editor.getSelection()
-      range.startOffset -= e.data.length
+    const insertText = (text, range) => {
       if (range.collapsed) {
-        this.elms.editor.cursorPos = range.startOffset + 1
-        this.document.insert(range.startOffset, e.data)
+        this.elms.editor.cursorPos = range.startOffset + text.length
+        this.document.insert(range.startOffset, text)
       } else {
-        this.elms.editor.setCursorPos(range.startOffset + 1 + e.data.length)
-        this.document.replace(range.startOffset + 1, range.endOffset, e.data)
+        this.elms.editor.setCursorPos(range.startOffset + 1 + text.length)
+        this.document.replace(range.startOffset + 1, range.endOffset, text)
       }
 
       let styles = this.document.getStylesAtOffset(range.startOffset)
@@ -204,16 +194,42 @@ class BakaEditor extends HTMLElement {
           this.document.mark(
             styleName,
             range.startOffset,
-            range.startOffset + e.data.length
+            range.startOffset + text.length
           )
         if (!this.stylesOverride[styleName] && styleName in styles)
           this.document.unmark(
             styleName,
             range.startOffset,
-            range.startOffset + e.data.length
+            range.startOffset + text.length
           )
       }
       this.stylesOverride = {}
+    }
+
+    this.elms.editor.addEventListener('paste', e => {
+      e.preventDefault()
+      const clipboardData = e.clipboardData || window.clipboardData
+      const pastedData = clipboardData.getData('Text')
+      let range =
+        lastSelection && !lastSelection.collapsed
+          ? lastSelection
+          : this.elms.editor.getSelection()
+      insertText(pastedData, range)
+      console.log(e, pastedData, range)
+    })
+
+    this.elms.editor.addEventListener('input', e => {
+      if (e.inputType !== 'insertText') return
+
+      e.preventDefault()
+
+      let range =
+        lastSelection && !lastSelection.collapsed
+          ? lastSelection
+          : this.elms.editor.getSelection()
+      range.startOffset -= e.data.length
+
+      insertText(e.data, range)
     })
 
     this.elms.editor.addEventListener('input', e => {

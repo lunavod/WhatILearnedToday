@@ -50,7 +50,13 @@ const client = {
     extensions: ['*', '.js', '.jsx']
   },
   devtool: 'source-map',
-  plugins: [new MiniCssExtractPlugin()]
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new webpack.DefinePlugin({
+      SERVER_BUILD: false,
+      CLIENT_BUILD: true
+    })
+  ]
 }
 
 const server = {
@@ -115,7 +121,11 @@ const server = {
       _: 'lodash',
       fetch: 'node-fetch'
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new webpack.DefinePlugin({
+      SERVER_BUILD: true,
+      CLIENT_BUILD: false
+    })
   ]
 }
 
