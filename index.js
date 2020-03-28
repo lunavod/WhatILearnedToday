@@ -38,6 +38,8 @@ app.get('*', async function(req, res) {
       .set(JSON.parse(req.cookies[`__stored_${options.name}`]))
   }
 
+  globalThis.api_key = tree.select('currentUser', 'api_key').get()
+
   let controller = routing[req.originalUrl]
   if (!controller) controller = routing[404]
   await controller.loadData(tree)

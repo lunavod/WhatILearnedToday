@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, Fragment } from 'react'
 import { useBranch } from 'baobab-react/hooks'
 import LoginActionsModal from '../LoginActionsModal'
+import CurrentUser from '../CurrentUser'
 
 import syles from './styles.css'
 
@@ -44,7 +45,7 @@ export default function Sidebar() {
         <div ref={refs[1]}>LEARNED</div>
         <div ref={refs[2]}>TODAY</div>
       </div>
-      {loggedIn ? '' : logged_items}
+      {loggedIn ? <CurrentUser /> : logged_items}
     </div>
   )
 }

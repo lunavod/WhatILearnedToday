@@ -6,7 +6,7 @@ import Button from '../Button'
 import { login, register } from '../../api'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes'
 
 import PropTypes from 'prop-types'
 
@@ -53,9 +53,11 @@ export default function LoginActionsModal() {
           .select(['modals', 'LoginActions', 'logIn'])
           .set({ username: '', password: '' })
         tree.select(['modals', 'LoginActions', 'isOpen']).set(false)
-        tree
-          .select(['currentUser'])
-          .set({ id: resp.result.session.user_id, loggedIn: true })
+        tree.select(['currentUser']).set({
+          id: resp.result.session.user_id,
+          loggedIn: true,
+          api_key: resp.result.key
+        })
       })
       return
     }
@@ -97,7 +99,11 @@ export default function LoginActionsModal() {
         tree.select(['modals', 'LoginActions', 'isOpen']).set(false)
         tree
           .select(['currentUser'])
-          .set({ id: resp.result.session.user_id, loggedIn: true })
+          .set({
+            id: resp.result.session.user_id,
+            loggedIn: true,
+            api_key: resp.result.key
+          })
       })
     }
 

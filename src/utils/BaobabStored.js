@@ -1,6 +1,8 @@
 import storage from './BetterLocalStorage'
 
-import { forEach, isArray, isEqual } from 'lodash'
+import forEach from 'lodash/forEach'
+import isArray from 'lodash/isArray'
+import isEqual from 'lodash/isEqual'
 import Cookies from 'js-cookie'
 
 /**

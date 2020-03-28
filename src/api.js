@@ -1,11 +1,11 @@
 async function post(url, data) {
-  if (globalThis.localStorage) {
-    const api_key = localStorage.getItem('api_key')
+  if (globalThis.api_key) {
     data = {
       ...data,
-      api_key
+      api_key: globalThis.api_key
     }
   }
+
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -19,11 +19,10 @@ async function post(url, data) {
 }
 
 async function get(url, data) {
-  if (globalThis.localStorage) {
-    const api_key = localStorage.getItem('api_key')
+  if (globalThis.api_key) {
     data = {
       ...data,
-      api_key
+      api_key: globalThis.api_key
     }
   }
   const response = await fetch(url, {

@@ -18,6 +18,16 @@ window.hydrateApp = initialState => {
   ]
 
   registerStored(stored, tree)
+
+  const watcher = tree.watch({
+    target: 'currentUser'
+  })
+
+  watcher.on('update', () => {
+    const newVal = tree.select('currentUser').get().api_key
+    globalThis.api_key = newVal
+  })
+
   window.tree = tree
   document.addEventListener('baobabExtensionReady', () => {
     console.log('Register event fired')
