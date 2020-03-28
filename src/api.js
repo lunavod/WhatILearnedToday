@@ -1,4 +1,8 @@
-async function post(url, data) {
+// @flow
+
+declare var globalThis: { api_key: string | void, localStorage: any }
+
+async function post(url: string, data?: any): Promise<any> {
   if (globalThis.api_key) {
     data = {
       ...data,
@@ -18,7 +22,7 @@ async function post(url, data) {
   return await response.json()
 }
 
-async function get(url, data) {
+async function get(url: string, data?: any): Promise<any> {
   if (globalThis.api_key) {
     data = {
       ...data,
@@ -32,15 +36,17 @@ async function get(url, data) {
   return await response.json()
 }
 
-export async function addPost(title, text) {
-  return await post('http://localhost:9999/posts', { post: { title, text } })
+export async function addPost(title: string, text: string): Promise<any> {
+  return await post('http://localhost:9999/posts', {
+    post: { title, text }
+  })
 }
 
-export async function getPosts() {
-  return await get('http://localhost:9999/posts')
+export async function getPosts(): Promise<Array<any>> {
+  return (await get('http://localhost:9999/posts')).posts
 }
 
-export async function login(username, password) {
+export async function login(username: string, password: string): Promise<any> {
   const resp = await post('http://localhost:9999/sessions', {
     user: { username, password }
   })
@@ -60,7 +66,11 @@ export async function login(username, password) {
   return resp
 }
 
-export async function register(username, email, password) {
+export async function register(
+  username: string,
+  email: string,
+  password: string
+): Promise<any> {
   const resp = await post('http://localhost:9999/users', {
     user: { username, email, password }
   })
@@ -70,4 +80,12 @@ export async function register(username, email, password) {
   if (resp.code !== 201) return resp
 
   return await login(username, password)
+}
+
+export async function getUser(id: number): Promise<any> {
+  const resp = await get('http://localhost:9999/users/' + id)
+  if (resp.code !== 200) {
+    throw 'NotFound'
+  }
+  return resp.result.user
 }

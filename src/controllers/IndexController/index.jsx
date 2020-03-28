@@ -7,7 +7,9 @@ import { getPosts, addPost } from '../../api'
 import syles from './styles.css'
 
 export function Controller() {
-  const { dispatch } = useBranch({})
+  const { loggedIn, dispatch } = useBranch({
+    loggedIn: ['logInData', 'loggedIn']
+  })
 
   const publish = async (title, text) => {
     await addPost(title, text)
@@ -17,14 +19,14 @@ export function Controller() {
 
   return (
     <Fragment>
-      <AddPost onSubmit={publish} />
+      {loggedIn ? <AddPost onSubmit={publish} /> : ''}
       <Posts />
     </Fragment>
   )
 }
 
 export async function loadData(tree) {
-  const posts = (await getPosts()).posts
+  const posts = await getPosts()
   tree.select('posts').set(posts)
   return true
 }

@@ -2,10 +2,11 @@ import Baobab from 'baobab'
 import registerStored from './utils/BaobabStored'
 
 const initialData = {
-  currentUser: {
+  logInData: {
     id: 0,
     loggedIn: false
   },
+  currentUser: {},
   modals: {
     LoginActions: {
       isOpen: false,
@@ -26,8 +27,8 @@ const tree = new Baobab(initialData)
 
 const stored = [
   {
-    path: ['currentUser'],
-    name: 'current_user',
+    path: ['logInData'],
+    name: 'log_in_datar',
     duplicateToCookies: true
   }
 ]

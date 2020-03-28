@@ -53,7 +53,7 @@ export default function LoginActionsModal() {
           .select(['modals', 'LoginActions', 'logIn'])
           .set({ username: '', password: '' })
         tree.select(['modals', 'LoginActions', 'isOpen']).set(false)
-        tree.select(['currentUser']).set({
+        tree.select(['logInData']).set({
           id: resp.result.session.user_id,
           loggedIn: true,
           api_key: resp.result.key
@@ -97,13 +97,11 @@ export default function LoginActionsModal() {
           .select(['modals', 'LoginActions', 'register'])
           .set({ username: '', email: '', password: '' })
         tree.select(['modals', 'LoginActions', 'isOpen']).set(false)
-        tree
-          .select(['currentUser'])
-          .set({
-            id: resp.result.session.user_id,
-            loggedIn: true,
-            api_key: resp.result.key
-          })
+        tree.select(['logInData']).set({
+          id: resp.result.session.user_id,
+          loggedIn: true,
+          api_key: resp.result.key
+        })
       })
     }
 

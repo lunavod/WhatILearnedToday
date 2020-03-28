@@ -17,7 +17,7 @@ export default function Sidebar() {
   })
 
   const { loggedIn, dispatch } = useBranch({
-    loggedIn: ['currentUser', 'loggedIn']
+    loggedIn: ['logInData', 'loggedIn']
   })
 
   const onOpenClick = () => {

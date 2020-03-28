@@ -11,8 +11,8 @@ window.hydrateApp = initialState => {
   const tree = new Baobab(initialState)
   const stored = [
     {
-      path: ['currentUser'],
-      name: 'current_user',
+      path: ['logInData'],
+      name: 'log_in_data',
       duplicateToCookies: true
     }
   ]
@@ -20,11 +20,11 @@ window.hydrateApp = initialState => {
   registerStored(stored, tree)
 
   const watcher = tree.watch({
-    target: 'currentUser'
+    target: 'logInData'
   })
 
   watcher.on('update', () => {
-    const newVal = tree.select('currentUser').get().api_key
+    const newVal = tree.select('logInData').get().api_key
     globalThis.api_key = newVal
   })
 

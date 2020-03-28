@@ -14,7 +14,8 @@
     "plugin:css-modules/recommended",
     "plugin:lodash/recommended",
     "plugin:import/warnings",
-    "plugin:promise/recommended"
+    "plugin:promise/recommended",
+    "plugin:flowtype/recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -26,7 +27,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["babel", "react", "css-modules", "lodash", "promise"],
+  "plugins": ["babel", "react", "css-modules", "lodash", "promise", "flowtype"],
   "rules": {
     "no-undef": "warn",
     "indent": [

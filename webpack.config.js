@@ -20,7 +20,7 @@ const client = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],
+            presets: ['@babel/preset-flow', '@babel/preset-env'],
             plugins: [
               ['@babel/plugin-transform-runtime'],
               '@babel/plugin-proposal-object-rest-spread',
@@ -87,7 +87,7 @@ const server = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],
+            presets: ['@babel/preset-flow', '@babel/preset-env'],
             plugins: [
               ['@babel/plugin-transform-runtime'],
               '@babel/plugin-proposal-object-rest-spread',

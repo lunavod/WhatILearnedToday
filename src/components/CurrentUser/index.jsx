@@ -5,15 +5,15 @@ import classNames from 'classnames'
 import styles from './styles.css'
 
 export default function CurrentUser() {
-  const { currentUser, dispatch } = useBranch({
-    currentUser: 'currentUser'
+  const { logInData, dispatch } = useBranch({
+    logInData: 'logInData'
   })
 
   const [isActive, setIsActive] = useState(false)
 
   const logOut = () => {
     dispatch(tree => {
-      tree.select('currentUser').set({ id: 0, loggedIn: false, apiKey: '' })
+      tree.select('logInData').set({ id: 0, loggedIn: false, apiKey: '' })
     })
   }
 
