@@ -1,7 +1,10 @@
+@import url(//db.onlinewebfonts.com/c/14126655f43628074be1976d86f13eae?family=Font+Awesome+5+Pro);
+
 body {
   margin: 0 !important;
   font-family: 'IBM Plex Sans', sans-serif;
-  background: #5672ff1f;
+  background: #5672ff12;
+  /* background: #e4e4e41f; */
 }
 
 :root {
@@ -19,6 +22,7 @@ body {
   font-family: var(--font-family);
   display: flex;
   padding: 32px;
+  padding-left: calc(64px + 32px + 32px);
   font-size: 16px;
 }
 
@@ -27,9 +31,10 @@ body {
   margin-left: auto;
   margin-right: 16px;
   width: 100%;
-  max-width: 300px;
+  max-width: 900px;
   padding: 16px;
-  /* background: blue; */
+  padding-top: 24px;
+  /* background: green; */
 }
 
 .right {
@@ -37,8 +42,7 @@ body {
   margin-right: auto;
   margin-left: 16px;
   width: 100%;
-  max-width: 700px;
+  max-width: 300px;
   padding: 16px;
-  padding-top: 24px;
-  /* background: green; */
+  /* background: blue; */
 }

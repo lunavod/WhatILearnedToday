@@ -1,5 +1,7 @@
 // @flow
 
+import chalk from 'chalk'
+
 declare var globalThis: { api_key: string | void, localStorage: any }
 
 async function post(url: string, data?: any, signal: any): Promise<any> {
@@ -10,6 +12,7 @@ async function post(url: string, data?: any, signal: any): Promise<any> {
     }
   }
 
+  console.log(chalk.greenBright(`API POST - ${url}`))
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -30,6 +33,7 @@ async function get(url: string, data?: any, signal: any): Promise<any> {
       api_key: globalThis.api_key
     }
   }
+  console.log(chalk.greenBright(`API GET - ${url}`))
   const response = await fetch(url, {
     method: 'GET',
     signal
@@ -90,4 +94,19 @@ export async function getUser(id: number, signal: any): Promise<any> {
     throw 'NotFound'
   }
   return resp.result.user
+}
+
+export async function getUserPosts(
+  username: string,
+  signal: any
+): Promise<Array<any>> {
+  const resp = await get(
+    `http://localhost:9999/users/${username}/posts`,
+    {},
+    signal
+  )
+  if (resp.code !== 200) {
+    throw 'NotFound'
+  }
+  return resp.result.posts
 }

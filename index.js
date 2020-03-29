@@ -7,6 +7,7 @@ var dateFormat = require('dateformat')
 const chalk = require('chalk')
 
 app.use('/dist', express.static('dist'))
+app.use('/public', express.static('public'))
 app.use(cookieParser())
 
 app.get('*', async function(req, res) {
@@ -35,7 +36,7 @@ app.get('*', async function(req, res) {
   globalThis.api_key = tree.select('logInData', 'api_key').get()
 
   const route = getRouteForUrl(req.originalUrl)
-  await route.loadData(tree)
+  await route.loadData(tree, route.data)
   await route.default.loadData(tree)
 
   const dehydratedContent = ReactDOMServer.renderToString(

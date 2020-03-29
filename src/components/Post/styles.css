@@ -2,13 +2,10 @@
   display: block;
   color: black;
   background: white;
-  /* background: rgba(0, 0, 255, 0.03); */
   padding: 24px;
   border-radius: 15px;
   margin-bottom: 42px;
-  /* box-shadow: 0 3px 8px #bdbdf9; */
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-  /* border: 1px solid #bdbdf9; */
 }
 
 .post header {
@@ -24,6 +21,7 @@
 .content {
   padding-top: 24px;
   line-height: 1.5em;
+  font-size: 19px;
 }
 
 .top_info_wrapper {
@@ -43,7 +41,7 @@
 }
 
 .title {
-  font-size: 1.4em;
+  font-size: 1.6em;
   /* color: var(--brand); */
   line-height: 1em;
   font-weight: 400;

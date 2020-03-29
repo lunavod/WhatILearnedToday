@@ -7,6 +7,7 @@ const initialData = {
     loggedIn: false
   },
   currentUser: {},
+  navbarItem: '',
   modals: {
     LoginActions: {
       isOpen: false,

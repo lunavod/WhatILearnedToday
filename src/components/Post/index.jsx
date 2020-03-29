@@ -18,7 +18,9 @@ export default function Post({ post }) {
         />
         <div styleName="top_info_wrapper">
           <div styleName="title">{post.title}</div>
-          <div styleName="username">{user.username}</div>
+          <a href={`/user/${user.id}`} styleName="username">
+            {user.username}
+          </a>
         </div>
       </header>
       <div

@@ -26,6 +26,8 @@ export function Controller() {
 }
 
 export async function loadData(tree) {
+  tree.select('navbarItem').set('posts')
+
   const posts = await getPosts()
   tree.select('posts').set(posts)
   return true

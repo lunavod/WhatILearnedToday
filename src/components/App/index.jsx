@@ -3,6 +3,7 @@ import { useRoot } from 'baobab-react/hooks'
 import AddPost from '../AddPost'
 import Sidebar from '../Sidebar'
 import Posts from '../Posts'
+import Navbar from '../Navbar'
 
 import getRouteForUrl from '../../routing'
 
@@ -16,11 +17,12 @@ export default function App({ store, pathname }) {
   return (
     <Root>
       <div styleName="wrapper">
+        <Navbar />
         <div styleName="left">
-          <Sidebar />
+          <Page routeData={route.data} />
         </div>
         <div styleName="right">
-          <Page routeData={route.data} />
+          <Sidebar />
         </div>
       </div>
     </Root>

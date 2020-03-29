@@ -1,3 +1,5 @@
+// @flow
+
 import React, { useRef, useEffect, Fragment } from 'react'
 import { useBranch } from 'baobab-react/hooks'
 import LoginActionsModal from '../LoginActionsModal'
@@ -5,11 +7,7 @@ import CurrentUser from '../CurrentUser'
 
 import styles from './styles.css'
 
-import fitty from 'fitty'
-
 export default function Sidebar() {
-  const refs = [useRef(), useRef(), useRef()]
-
   const { loggedIn, dispatch } = useBranch({
     loggedIn: ['logInData', 'loggedIn']
   })
