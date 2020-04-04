@@ -1,0 +1,7 @@
+[{*.js, *.jsx}]
+indent_style = space
+indent_size = 2
+
+[src/utils/BakaEditor/**.js]
+indent_style = space
+indent_size = 4

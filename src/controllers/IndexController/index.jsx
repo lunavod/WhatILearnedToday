@@ -8,13 +8,13 @@ import syles from './styles.css'
 
 export function Controller() {
   const { loggedIn, dispatch } = useBranch({
-    loggedIn: ['logInData', 'loggedIn']
+    loggedIn: ['logInData', 'loggedIn'],
   })
 
-  const publish = async (title, text) => {
-    await addPost(title, text)
-    const newPosts = (await getPosts()).posts
-    dispatch(tree => tree.select('posts').set(newPosts))
+  const publish = async (title, text, original_text) => {
+    await addPost(title, text, original_text)
+    const newPosts = await getPosts()
+    dispatch((tree) => tree.select('posts').set(newPosts))
   }
 
   return (

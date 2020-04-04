@@ -13,15 +13,9 @@
 }
 
 .avatar {
-  width: 48px;
-  height: 48px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
-}
-
-.content {
-  padding-top: 24px;
-  line-height: 1.5em;
-  font-size: 19px;
 }
 
 .top_info_wrapper {
@@ -32,17 +26,40 @@
   margin-left: 16px;
 }
 
+.title {
+  font-size: 1.6em;
+  /* color: var(--brand); */
+  line-height: 1em;
+  font-weight: 400;
+}
+
 .username {
-  font-size: 0.9em;
+  font-size: 1em;
   color: rgba(0, 0, 0, 0.6);
   line-height: calc(1em);
   font-weight: 500;
   padding-top: 8px;
 }
 
-.title {
-  font-size: 1.6em;
-  /* color: var(--brand); */
-  line-height: 1em;
-  font-weight: 400;
+.actions {
+  display: inline-flex;
+  margin-left: auto;
+  height: 54px;
+}
+
+.actions a {
+  width: 54px;
+  height: 54px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.content {
+  padding-top: 24px;
+  line-height: 1.5em;
+  font-size: 18px;
 }

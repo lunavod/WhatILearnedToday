@@ -1,0 +1,136 @@
+body {
+    background: #5672ff05;
+    font-family: 'IBM Plex Sans', sans-serif;
+    padding: 120px;
+}
+
+#output_code_preview {
+    padding: 6px;
+    font-size: 1em;
+    width: 700px;
+    min-height: calc(1.3em + 12px);
+    background: #f7f7ff;
+    border: 1px solid #d4d5ff;
+    border-radius: 5px;
+    margin-top: 54px;
+    box-sizing: border-box;
+}
+
+:root {
+    --button-size: 32px;
+    --editor-padding: 6px;
+    --border-radius: 5px;
+}
+
+#wrapper {
+    width: 700px;
+    background: white;
+    box-shadow: rgba(0, 0, 255, 0.24) 0px 5px 24px;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    position: relative;
+}
+
+#buttons {
+    width: var(--button-size);
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 255, 0.03);
+    border-right: 1px solid rgba(0, 0, 255, 0.06);
+}
+
+#buttons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--button-size);
+    height: var(--button-size);
+    text-decoration: none;
+    font-size: 1.2em;
+    color: rgba(0, 0, 255, 0.3);
+    transition: color 0.2s;
+}
+
+#buttons a.active {
+    /* background: rgba(0, 0, 255, 0.08); */
+    color: #ffd324;
+    /* background: #ffd324; */
+}
+
+#buttons #bold {
+    font-weight: bold;
+}
+
+#buttons #italic {
+    font-style: italic;
+}
+
+#buttons #strike {
+    text-decoration: line-through;
+}
+
+#buttons #underline {
+    text-decoration: underline;
+}
+
+#buttons #monospace {
+    font-family: monospace;
+}
+
+#placeholder {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 6px;
+    left: calc(var(--editor-padding) + 1px + var(--button-size));
+    opacity: 0.6;
+    z-index: 0;
+}
+
+#placeholder.invisible {
+    opacity: 0;
+}
+
+#editor {
+    width: 100%;
+    height: auto;
+    min-height: 250px;
+    padding: calc(var(--editor-padding) - 1px);
+    background: transparent;
+    z-index: 1;
+    border-radius: 0px var(--border-radius) var(--border-radius) 0;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+#editor * {
+    white-space: pre;
+}
+
+#editor:focus {
+    outline: 0px solid transparent;
+    border-color: rgba(0, 0, 255, 0.24);
+}
+
+#editor .empty {
+    height: 1em;
+}
+
+#editor:active {
+    outline: none;
+}
+
+#editor .monospace {
+    font-family: Monospace;
+    background: lightgray;
+    padding: 2px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+#editor .service {
+    color: #b1b1b1;
+}

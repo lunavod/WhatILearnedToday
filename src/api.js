@@ -4,11 +4,11 @@ import chalk from 'chalk'
 
 declare var globalThis: { api_key: string | void, localStorage: any }
 
-async function post(url: string, data?: any, signal: any): Promise<any> {
+async function POST(url: string, data?: any, signal: any): Promise<any> {
   if (globalThis.api_key) {
     data = {
       ...data,
-      api_key: globalThis.api_key
+      api_key: globalThis.api_key,
     }
   }
 
@@ -16,45 +16,100 @@ async function post(url: string, data?: any, signal: any): Promise<any> {
   const response = await fetch(url, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     // mode: 'no-cors',
     body: JSON.stringify(data),
-    signal
+    signal,
   })
 
   return await response.json()
 }
 
-async function get(url: string, data?: any, signal: any): Promise<any> {
+async function GET(url: string, data?: any, signal: any): Promise<any> {
   if (globalThis.api_key) {
     data = {
       ...data,
-      api_key: globalThis.api_key
+      api_key: globalThis.api_key,
     }
   }
   console.log(chalk.greenBright(`API GET - ${url}`))
   const response = await fetch(url, {
     method: 'GET',
-    signal
+    signal,
   })
 
   return await response.json()
 }
 
-export async function addPost(title: string, text: string): Promise<any> {
-  return await post('http://localhost:9999/posts', {
-    post: { title, text }
+async function DELETE(url: string, data?: any, signal: any): Promise<any> {
+  if (globalThis.api_key) {
+    data = {
+      ...data,
+      api_key: globalThis.api_key,
+    }
+  }
+  console.log(chalk.greenBright(`API DELETE - ${url}`))
+  const response = await fetch(url, {
+    method: 'delete',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    signal,
+  })
+
+  return await response.json()
+}
+
+async function PATCH(url: string, data?: any, signal: any): Promise<any> {
+  if (globalThis.api_key) {
+    data = {
+      ...data,
+      api_key: globalThis.api_key,
+    }
+  }
+  console.log(chalk.greenBright(`API DELETE - ${url}`))
+  const response = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    signal,
+  })
+
+  return await response.json()
+}
+
+export async function addPost(
+  title: string,
+  text: string,
+  original_text: string
+): Promise<any> {
+  return await POST('http://localhost:9999/posts', {
+    post: { title, text, original_text },
+  })
+}
+
+export async function editPost(
+  id: number,
+  title: string,
+  text: string,
+  original_text: string
+): Promise<any> {
+  return await PATCH(`http://localhost:9999/posts/${id.toString()}`, {
+    post: { title, text, original_text },
   })
 }
 
 export async function getPosts(): Promise<Array<any>> {
-  return (await get('http://localhost:9999/posts')).posts
+  return (await GET('http://localhost:9999/posts')).posts
 }
 
 export async function login(username: string, password: string): Promise<any> {
-  const resp = await post('http://localhost:9999/sessions', {
-    user: { username, password }
+  const resp = await POST('http://localhost:9999/sessions', {
+    user: { username, password },
   })
 
   console.log(resp)
@@ -77,8 +132,8 @@ export async function register(
   email: string,
   password: string
 ): Promise<any> {
-  const resp = await post('http://localhost:9999/users', {
-    user: { username, email, password }
+  const resp = await POST('http://localhost:9999/users', {
+    user: { username, email, password },
   })
 
   console.log('Register!', username, email, password, resp)
@@ -89,7 +144,7 @@ export async function register(
 }
 
 export async function getUser(id: number, signal: any): Promise<any> {
-  const resp = await get('http://localhost:9999/users/' + id, {}, signal)
+  const resp = await GET('http://localhost:9999/users/' + id, {}, signal)
   if (resp.code !== 200) {
     throw 'NotFound'
   }
@@ -100,7 +155,7 @@ export async function getUserPosts(
   username: string,
   signal: any
 ): Promise<Array<any>> {
-  const resp = await get(
+  const resp = await GET(
     `http://localhost:9999/users/${username}/posts`,
     {},
     signal
@@ -109,4 +164,12 @@ export async function getUserPosts(
     throw 'NotFound'
   }
   return resp.result.posts
+}
+
+export async function deletePost(id: number): Promise<void> {
+  const resp = await DELETE(`http://localhost:9999/posts/${id}`)
+  if (resp.code !== 200) {
+    throw 'NotFound'
+  }
+  return resp
 }

@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Test BakaEditor</title>
+        <meta charset="utf-8" />
+        <link
+            href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles.css" />
+        <script src="dist/bundle.js"></script>
+    </head>
+    <body>
+        <!-- <h1 id="title">Baka editor:</h1> -->
+        <input type="hidden" id="hidden_input" />
+        <baka-editor output="#hidden_input"></baka-editor>
+        <pre id="output_code_preview"></pre>
+    </body>
+
+    <script>
+        const input = document.querySelector('#hidden_input')
+        const pre = document.querySelector('#output_code_preview')
+
+        const config = {
+            attributes: true,
+        }
+
+        const callback = (mutationList, observer) => {
+            for (let mutation of mutationList) {
+                if (mutation.attributeName === 'value') {
+                    pre.innerText = input.value
+                }
+            }
+        }
+
+        const observer = new MutationObserver(callback)
+        observer.observe(input, config)
+    </script>
+</html>

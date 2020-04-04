@@ -6,7 +6,7 @@ import { getUser } from './api'
 
 const defaultController = {
   async loadData(tree: any) {
-    if (!tree.select('logInData', 'loggedIn')) {
+    if (!tree.select('logInData', 'loggedIn').get()) {
       console.log('Not logged in! D:')
       return
     }

@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom'
 import React from 'react'
 import Baobab from 'baobab'
 
-require('./utils/BakaEditor/index.js')
+require('./utils/BakaEditor/src/index.js')
 import registerStored from './utils/BaobabStored'
 
 import App from './components/App'
