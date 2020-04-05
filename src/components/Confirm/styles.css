@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  padding: 12px;
+  background: var(--accent);
+  border-radius: 5px;
+  margin-bottom: 12px;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+}
+
+.text {
+}
+
+.actions {
+  display: flex;
+}
+
+.actions > button {
+  margin-left: 12px;
+}
+
+.deny {
+}
+
+.accept {
+}
