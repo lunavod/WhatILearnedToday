@@ -1,4 +1,4 @@
-@import url(//db.onlinewebfonts.com/c/14126655f43628074be1976d86f13eae?family=Font+Awesome+5+Pro);
+@import url(//db.onlinewebfonts.com/c/14126655f43628074be1976d86f13eae?family=Font + Awesome + 5 + Pro);
 
 body {
   margin: 0 !important;
@@ -22,7 +22,7 @@ body {
   font-family: var(--font-family);
   display: flex;
   padding: 32px;
-  padding-left: calc(64px + 32px + 32px);
+  padding-left: calc(64px + 32px);
   font-size: 16px;
 }
 

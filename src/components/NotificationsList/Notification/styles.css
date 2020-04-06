@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  width: 250px;
+  padding: 16px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.wrapper.info {
+  background: var(--brand);
+  color: white;
+  box-shadow: 0 2px 8px var(--brand);
+}
+
+.wrapper.error {
+  background: var(--accent);
+  /* color: white; */
+  box-shadow: 0 2px 8px var(--accent);
+}
+
+.title {
+}
+
+.close {
+  cursor: pointer;
+  /* position: absolute;
+  right: 8px;
+  top: 8px; */
+}

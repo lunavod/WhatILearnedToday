@@ -5,6 +5,8 @@ import Input from '../Input'
 import Button from '../Button'
 import { login, register } from '../../api'
 
+import { addNotification } from '../../actions/notifications'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes'
 
@@ -16,7 +18,7 @@ export default function LoginActionsModal() {
   const { isOpen, dispatch, logInTexts, registerTexts } = useBranch({
     isOpen: ['modals', 'LoginActions', 'isOpen'],
     logInTexts: ['modals', 'LoginActions', 'logIn'],
-    registerTexts: ['modals', 'LoginActions', 'register']
+    registerTexts: ['modals', 'LoginActions', 'register'],
   })
 
   const [logInUsernameErrors, setLogInUsernameErrors] = useState('')
@@ -27,13 +29,13 @@ export default function LoginActionsModal() {
   const [registerPasswordErrors, setRegisterPasswordErrors] = useState('')
 
   const updateText = (type, name, value) => {
-    dispatch(tree => {
+    dispatch((tree) => {
       tree.select(['modals', 'LoginActions', type, name]).set(value)
     })
   }
 
   const onCloseClick = () => {
-    dispatch(tree => {
+    dispatch((tree) => {
       tree.select(['modals', 'LoginActions', 'isOpen']).set(false)
     })
   }
@@ -48,7 +50,7 @@ export default function LoginActionsModal() {
 
     console.log('LogInerrors', logInErrors)
     if (resp.code === 200) {
-      dispatch(tree => {
+      dispatch((tree) => {
         tree
           .select(['modals', 'LoginActions', 'logIn'])
           .set({ username: '', password: '' })
@@ -56,14 +58,15 @@ export default function LoginActionsModal() {
         tree.select(['logInData']).set({
           id: resp.result.session.user_id,
           loggedIn: true,
-          api_key: resp.result.key
+          api_key: resp.result.key,
         })
       })
+      dispatch(addNotification('Вход выполнен успешно!'))
       return
     }
 
     for (let fieldName in logInErrors) {
-      let errors = logInErrors[fieldName].map(error => (
+      let errors = logInErrors[fieldName].map((error) => (
         <div key={error}>
           {fieldName} {error}
         </div>
@@ -92,7 +95,7 @@ export default function LoginActionsModal() {
     setRegisterPasswordErrors([])
 
     if (resp.code === 200) {
-      dispatch(tree => {
+      dispatch((tree) => {
         tree
           .select(['modals', 'LoginActions', 'register'])
           .set({ username: '', email: '', password: '' })
@@ -100,13 +103,14 @@ export default function LoginActionsModal() {
         tree.select(['logInData']).set({
           id: resp.result.session.user_id,
           loggedIn: true,
-          api_key: resp.result.key
+          api_key: resp.result.key,
         })
       })
+      dispatch(addNotification('Вход выполнен успешно!'))
     }
 
     for (let fieldName in registerErrors) {
-      let errors = registerErrors[fieldName].map(error => (
+      let errors = registerErrors[fieldName].map((error) => (
         <div key={error}>
           {fieldName} {error}
         </div>
@@ -134,14 +138,14 @@ export default function LoginActionsModal() {
             type="text"
             placeholder="Имя пользователя"
             value={logInTexts.username}
-            onChange={e => updateText('logIn', 'username', e.target.value)}
+            onChange={(e) => updateText('logIn', 'username', e.target.value)}
           />
           <div styleName="fieldErrors">{logInUsernameErrors}</div>
           <Input
             type="password"
             placeholder="Пароль"
             value={logInTexts.password}
-            onChange={e => updateText('logIn', 'password', e.target.value)}
+            onChange={(e) => updateText('logIn', 'password', e.target.value)}
           />
           <div styleName="fieldErrors">{logInPasswordErrors}</div>
           <Button style={{ marginTop: 'auto' }} round onClick={onLoginClick}>
@@ -158,7 +162,7 @@ export default function LoginActionsModal() {
             placeholder="Имя пользователя"
             accent
             value={registerTexts.username}
-            onChange={e => updateText('register', 'username', e.target.value)}
+            onChange={(e) => updateText('register', 'username', e.target.value)}
           />
           <div styleName="fieldErrors">{registerUsernameErrors}</div>
           <Input
@@ -166,7 +170,7 @@ export default function LoginActionsModal() {
             placeholder="Email"
             accent
             value={registerTexts.email}
-            onChange={e => updateText('register', 'email', e.target.value)}
+            onChange={(e) => updateText('register', 'email', e.target.value)}
           />
           <div styleName="fieldErrors">{registerEmailErrors}</div>
           <Input
@@ -174,7 +178,7 @@ export default function LoginActionsModal() {
             placeholder="Пароль"
             accent
             value={registerTexts.password}
-            onChange={e => updateText('register', 'password', e.target.value)}
+            onChange={(e) => updateText('register', 'password', e.target.value)}
           />
           <div styleName="fieldErrors">{registerPasswordErrors}</div>
           <Button

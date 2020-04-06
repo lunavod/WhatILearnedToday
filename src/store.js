@@ -4,7 +4,7 @@ import registerStored from './utils/BaobabStored'
 const initialData = {
   logInData: {
     id: 0,
-    loggedIn: false
+    loggedIn: false,
   },
   currentUser: {},
   navbarItem: '',
@@ -12,16 +12,17 @@ const initialData = {
     LoginActions: {
       isOpen: false,
       logIn: {
-        username: 'TestUser',
-        password: 'password'
+        username: '',
+        password: '',
       },
       register: {
         username: '',
         password: '',
-        email: ''
-      }
-    }
-  }
+        email: '',
+      },
+    },
+  },
+  notifications: [],
 }
 
 const tree = new Baobab(initialData)
@@ -30,8 +31,8 @@ const stored = [
   {
     path: ['logInData'],
     name: 'log_in_datar',
-    duplicateToCookies: true
-  }
+    duplicateToCookies: true,
+  },
 ]
 
 registerStored(stored, tree)

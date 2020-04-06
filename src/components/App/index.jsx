@@ -4,6 +4,9 @@ import AddPost from '../AddPost'
 import Sidebar from '../Sidebar'
 import Posts from '../Posts'
 import Navbar from '../Navbar'
+import NotificationsList from '../NotificationsList'
+
+import { addNotification } from '../../actions/notifications'
 
 import getRouteForUrl from '../../routing'
 
@@ -14,9 +17,11 @@ export default function App({ store, pathname }) {
   const Root = useRoot(store)
   const route = getRouteForUrl(pathname)
   const Page = route.Controller
+
   return (
     <Root>
       <div styleName="wrapper">
+        <NotificationsList />
         <Navbar />
         <div styleName="left">
           <Page routeData={route.data} />
