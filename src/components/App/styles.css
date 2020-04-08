@@ -1,10 +1,16 @@
-@import url(//db.onlinewebfonts.com/c/14126655f43628074be1976d86f13eae?family=Font + Awesome + 5 + Pro);
+@import url(//db.onlinewebfonts.com/c/14126655f43628074be1976d86f13eae?family=Font+Awesome+5+Pro);
+
+@font-face {
+  font-family: "Anime Ace";
+  src: url("/public/webfonts/animeace.ttf");
+}
 
 body {
   margin: 0 !important;
   font-family: 'IBM Plex Sans', sans-serif;
-  background: #5672ff12;
+  /*background: #5672ff12;*/
   /* background: #e4e4e41f; */
+  background: #5672ff2b;
 }
 
 :root {
@@ -22,8 +28,21 @@ body {
   font-family: var(--font-family);
   display: flex;
   padding: 32px;
-  padding-left: calc(64px + 32px);
   font-size: 16px;
+}
+
+.wrapper::before {
+  content: ' ';
+  width: 100%;
+  height: 35%;
+  /*background: var(--brand);*/
+  background: #6666ff;
+  display: block;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 28px;
+  box-shadow: 0 0 6px 1px #6666ff;
 }
 
 .left {
@@ -31,10 +50,22 @@ body {
   margin-left: auto;
   margin-right: 16px;
   width: 100%;
+  max-width: 300px;
+  padding: 16px;
+  padding-top: 24px;
+  margin-top: 24px;
+  /* background: green; */
+}
+
+.middle {
+  display: inline-block;
+  margin-left: 16px;
+  margin-right: 16px;
+  width: 100%;
   max-width: 900px;
   padding: 16px;
   padding-top: 24px;
-  /* background: green; */
+  margin-top: 36px;
 }
 
 .right {
@@ -44,5 +75,17 @@ body {
   width: 100%;
   max-width: 300px;
   padding: 16px;
+  margin-top: 36px;
   /* background: blue; */
+}
+
+.nekoPlaceholder {
+  background: white;
+  padding: 32px 16px;
+  text-align: center;
+  border: 2px solid black;
+  width: 150px;
+  font-size: 1em;
+  font-family: "Anime Ace", sans-serif;
+  margin: 0 auto;
 }

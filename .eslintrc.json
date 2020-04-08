@@ -6,7 +6,8 @@
   },
   "globals": {
     "CLIENT_BUILD": true,
-    "SERVER_BUILD": true
+    "SERVER_BUILD": true,
+    "globalThis": true
   },
   "extends": [
     "eslint:recommended",
@@ -29,10 +30,12 @@
   },
   "plugins": ["babel", "react", "css-modules", "lodash", "promise", "flowtype"],
   "rules": {
+    "css-modules/no-unused-class": [0],
+    "no-unused-vars": ["warn", {"varsIgnorePattern": "styles"}],
     "no-undef": "warn",
     "indent": [
       "error",
-      4,
+      2,
       {
         "SwitchCase": 1
       }

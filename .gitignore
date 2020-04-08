@@ -1,3 +1,4 @@
 tmp/pid
 node_modules
 dist
+.env

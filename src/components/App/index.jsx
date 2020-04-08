@@ -1,18 +1,22 @@
-import React, { Fagment } from 'react'
+// @flow
+
+import React from 'react'
 import { useRoot } from 'baobab-react/hooks'
-import AddPost from '../AddPost'
 import Sidebar from '../Sidebar'
-import Posts from '../Posts'
 import Navbar from '../Navbar'
 import NotificationsList from '../NotificationsList'
 
-import { addNotification } from '../../actions/notifications'
-
 import getRouteForUrl from '../../routing'
 
-import syles from './styles.css'
+import styles from './styles.css'
 
-export default function App({ store, pathname }) {
+export default function App({
+  store,
+  pathname,
+}: {
+  store: {},
+  pathname: string,
+}) {
   if (!pathname) pathname = location.pathname
   const Root = useRoot(store)
   const route = getRouteForUrl(pathname)
@@ -24,10 +28,15 @@ export default function App({ store, pathname }) {
         <NotificationsList />
         <Navbar />
         <div styleName="left">
+          <Sidebar />
+        </div>
+        <div styleName="middle">
           <Page routeData={route.data} />
         </div>
         <div styleName="right">
-          <Sidebar />
+          <div styleName="nekoPlaceholder">
+            Тут будет неко с ноутбуком, но пока тут только я, Дио!
+          </div>
         </div>
       </div>
     </Root>

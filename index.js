@@ -1,16 +1,18 @@
 const express = require('express')
-const fs = require('fs')
 const app = express()
 const decache = require('decache')
 const cookieParser = require('cookie-parser')
-var dateFormat = require('dateformat')
+const dateFormat = require('dateformat')
 const chalk = require('chalk')
+
+require('dotenv').config()
+globalThis.ENV = { API: process.env.API }
 
 app.use('/dist', express.static('dist'))
 app.use('/public', express.static('public'))
 app.use(cookieParser())
 
-app.get('*', async function(req, res) {
+app.get('*', async function (req, res) {
   decache(require.resolve('./dist/serverBundle'))
   decache(require.resolve('react'))
   decache(require.resolve('react-dom/server'))
@@ -22,8 +24,8 @@ app.get('*', async function(req, res) {
   const storedCookies = [
     {
       path: ['logInData'],
-      name: 'log_in_data'
-    }
+      name: 'log_in_data',
+    },
   ]
 
   for (const options of storedCookies) {
@@ -55,10 +57,10 @@ app.get('*', async function(req, res) {
 })
 
 function startServer() {
-  return app.listen(8989, function() {
+  return app.listen(8989, function () {
     console.log(chalk.green('BlogFront listening on port 8989!'))
     console.log()
   })
 }
 
-let server = startServer()
+startServer()

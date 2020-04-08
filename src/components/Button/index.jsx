@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
@@ -9,9 +11,17 @@ export default function Button({
   round,
   accent,
   secondary,
+  shadow,
   style,
   onClick,
-  shadow
+}: {
+  children: {},
+  round: boolean,
+  accent: boolean,
+  secondary: boolean,
+  shadow: boolean,
+  style: {},
+  onClick: (e) => {},
 }) {
   return (
     <button
@@ -22,7 +32,7 @@ export default function Button({
         round,
         accent,
         secondary,
-        shadow
+        shadow,
       })}
     >
       {children}

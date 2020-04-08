@@ -4,7 +4,7 @@ import AddPost from '../../components/AddPost'
 import Posts from '../../components/Posts'
 import { getPosts, addPost } from '../../api'
 
-import syles from './styles.css'
+import styles from './styles.css'
 
 export function Controller() {
   const { loggedIn, dispatch } = useBranch({
@@ -19,7 +19,7 @@ export function Controller() {
 
   return (
     <Fragment>
-      {loggedIn ? <AddPost onSubmit={publish} /> : ''}
+      {/*{loggedIn ? <AddPost onSubmit={publish} /> : ''}*/}
       <Posts />
     </Fragment>
   )

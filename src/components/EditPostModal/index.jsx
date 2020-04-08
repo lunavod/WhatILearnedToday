@@ -1,3 +1,5 @@
+// @flow
+
 import React, { useRef, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
@@ -9,7 +11,13 @@ import Confirm from '../Confirm'
 import styles from './styles.css'
 import { editPost } from '../../api'
 
-export default function EditPostModal({ post, close }) {
+export default function EditPostModal({
+  post,
+  close,
+}: {
+  post: { title: string, text: string, original_text: string, id: number },
+  close: () => {},
+}) {
   const [title, setTitle] = useState(post.title)
   const [text, setText] = useState(post.text)
   const [originalText, setOriginalText] = useState(post.original_text)
@@ -17,15 +25,13 @@ export default function EditPostModal({ post, close }) {
   const [isCloseConfirmActive, setIsCloseConfirmActive] = useState(false)
   const [isResetConfirmActive, setIsResetConfirmActive] = useState(false)
 
-  const editorRef = useRef()
-
   const onResetClick = () => {
     setIsResetConfirmActive(true)
   }
 
-  const onPublishClick = () => {
+  const onPublishClick = async () => {
     console.log(originalText)
-    editPost(post.id, title, text, originalText)
+    await editPost(post.id, title, text, originalText)
 
     setTitle('')
     setText('')
@@ -62,44 +68,62 @@ export default function EditPostModal({ post, close }) {
 
   return (
     <Modal isOpen={true} close={onClose}>
-      {isCloseConfirmActive && text !== post.text ? (
-        <Confirm
-          text="У вас есть несохраненные изменения. Вы уверены, что хотите завершить редактирование?"
-          onAccept={onCloseAccept}
-          onDeny={onCloseDeny}
-        />
-      ) : (
-        ''
-      )}
       <div styleName="wrapper">
-        <PostForm
-          {...{
-            title,
-            setTitle,
-            text,
-            setText,
-            originalText,
-            setOriginalText,
-            prefix: `edit_${post.id}`,
-          }}
-        />
-      </div>
-      {isResetConfirmActive && text !== post.text ? (
-        <Confirm
-          text="У вас есть несохраненные изменения. Вы уверены, что хотите их отменить?"
-          onAccept={onResetAccept}
-          onDeny={onResetDeny}
-        />
-      ) : (
-        ''
-      )}
-      <div styleName="actions">
-        <Button onClick={onResetClick} shadow accent>
-          Сбросить
-        </Button>
-        <Button onClick={onPublishClick} shadow>
-          Опубликовать
-        </Button>
+        <div styleName="edit">
+          <PostForm
+            {...{
+              title,
+              setTitle,
+              text,
+              setText,
+              originalText,
+              setOriginalText,
+              prefix: `edit_${post.id}`,
+            }}
+          />
+
+          <div styleName="confirmations">
+            {isResetConfirmActive && text !== post.text ? (
+              <Confirm
+                text="У вас есть несохраненные изменения. Вы уверены, что хотите их отменить?"
+                onAccept={onResetAccept}
+                onDeny={onResetDeny}
+              />
+            ) : (
+              ''
+            )}
+            {isCloseConfirmActive && text !== post.text ? (
+              <Confirm
+                text="У вас есть несохраненные изменения. Вы уверены, что хотите завершить редактирование?"
+                onAccept={onCloseAccept}
+                onDeny={onCloseDeny}
+              />
+            ) : (
+              ''
+            )}
+          </div>
+
+          <div styleName="actions">
+            <Button onClick={onResetClick} shadow accent round>
+              <i className="fas fa-undo"></i>
+            </Button>
+            <Button
+              onClick={onPublishClick}
+              shadow
+              round
+              style={{ marginLeft: '24px' }}
+            >
+              <i className="fas fa-check"></i>
+            </Button>
+          </div>
+        </div>
+        <div styleName="preview">
+          <div styleName="previewTitle">{title}</div>
+          <div
+            styleName="previewText"
+            dangerouslySetInnerHTML={{ __html: text }}
+          />
+        </div>
       </div>
     </Modal>
   )

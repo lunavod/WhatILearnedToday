@@ -9,7 +9,7 @@ import styles from './styles.css'
 
 export default function Navbar() {
   const { navbarItem }: { navbarItem: string } = useBranch({
-    navbarItem: ['navbarItem']
+    navbarItem: ['navbarItem'],
   })
 
   return (
@@ -19,19 +19,10 @@ export default function Navbar() {
           href="#"
           className={classNames({
             [styles.navbar_link]: true,
-            [styles.active]: navbarItem === 'posts'
+            [styles.active]: navbarItem === 'settings',
           })}
         >
-          <i className="fal fa-book"></i>
-        </a>
-        <a
-          href="#"
-          className={classNames({
-            [styles.navbar_link]: true,
-            [styles.active]: navbarItem === 'users'
-          })}
-        >
-          <i className="fal fa-users"></i>
+          Настройки
         </a>
       </div>
       <div>
@@ -39,10 +30,19 @@ export default function Navbar() {
           href="#"
           className={classNames({
             [styles.navbar_link]: true,
-            [styles.active]: navbarItem === 'settings'
+            [styles.active]: navbarItem === 'posts',
           })}
         >
-          <i className="fal fa-cogs"></i>
+          Посты
+        </a>
+        <a
+          href="#"
+          className={classNames({
+            [styles.navbar_link]: true,
+            [styles.active]: navbarItem === 'users',
+          })}
+        >
+          Пользователи
         </a>
       </div>
     </div>

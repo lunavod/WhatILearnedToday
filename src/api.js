@@ -2,7 +2,11 @@
 
 import chalk from 'chalk'
 
-declare var globalThis: { api_key: string | void, localStorage: any }
+declare var globalThis: {
+  api_key: string | void,
+  localStorage: any,
+  process: { env: { API: string } },
+}
 
 async function POST(url: string, data?: any, signal: any): Promise<any> {
   if (globalThis.api_key) {
@@ -12,8 +16,8 @@ async function POST(url: string, data?: any, signal: any): Promise<any> {
     }
   }
 
-  console.log(chalk.greenBright(`API POST - ${url}`))
-  const response = await fetch(url, {
+  console.log(chalk.greenBright(`API POST - ${process.env.API + url}`))
+  const response = await fetch(process.env.API + url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -33,8 +37,8 @@ async function GET(url: string, data?: any, signal: any): Promise<any> {
       api_key: globalThis.api_key,
     }
   }
-  console.log(chalk.greenBright(`API GET - ${url}`))
-  const response = await fetch(url, {
+  console.log(chalk.greenBright(`API GET - ${process.env.API + url}`))
+  const response = await fetch(process.env.API + url, {
     method: 'GET',
     signal,
   })
@@ -49,8 +53,8 @@ async function DELETE(url: string, data?: any, signal: any): Promise<any> {
       api_key: globalThis.api_key,
     }
   }
-  console.log(chalk.greenBright(`API DELETE - ${url}`))
-  const response = await fetch(url, {
+  console.log(chalk.greenBright(`API DELETE - ${process.env.API + url}`))
+  const response = await fetch(ENV.API + url, {
     method: 'delete',
     headers: {
       'Content-Type': 'application/json',
@@ -69,8 +73,9 @@ async function PATCH(url: string, data?: any, signal: any): Promise<any> {
       api_key: globalThis.api_key,
     }
   }
-  console.log(chalk.greenBright(`API DELETE - ${url}`))
-  const response = await fetch(url, {
+  console.log(process, globalThis)
+  console.log(chalk.greenBright(`API PATCH - ${ENV.API + url}`))
+  const response = await fetch(ENV.API + url, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -98,17 +103,17 @@ export async function editPost(
   text: string,
   original_text: string
 ): Promise<any> {
-  return await PATCH(`http://localhost:9999/posts/${id.toString()}`, {
+  return await PATCH(`/posts/${id.toString()}`, {
     post: { title, text, original_text },
   })
 }
 
 export async function getPosts(): Promise<Array<any>> {
-  return (await GET('http://localhost:9999/posts')).posts
+  return (await GET('/posts')).posts
 }
 
 export async function login(username: string, password: string): Promise<any> {
-  const resp = await POST('http://localhost:9999/sessions', {
+  const resp = await POST('/sessions', {
     user: { username, password },
   })
 
@@ -132,7 +137,7 @@ export async function register(
   email: string,
   password: string
 ): Promise<any> {
-  const resp = await POST('http://localhost:9999/users', {
+  const resp = await POST('/users', {
     user: { username, email, password },
   })
 
@@ -144,7 +149,7 @@ export async function register(
 }
 
 export async function getUser(id: number, signal: any): Promise<any> {
-  const resp = await GET('http://localhost:9999/users/' + id, {}, signal)
+  const resp = await GET('/users/' + id, {}, signal)
   if (resp.code !== 200) {
     throw 'NotFound'
   }
@@ -155,11 +160,7 @@ export async function getUserPosts(
   username: string,
   signal: any
 ): Promise<Array<any>> {
-  const resp = await GET(
-    `http://localhost:9999/users/${username}/posts`,
-    {},
-    signal
-  )
+  const resp = await GET(`/users/${username}/posts`, {}, signal)
   if (resp.code !== 200) {
     throw 'NotFound'
   }
@@ -167,7 +168,7 @@ export async function getUserPosts(
 }
 
 export async function deletePost(id: number): Promise<void> {
-  const resp = await DELETE(`http://localhost:9999/posts/${id}`)
+  const resp = await DELETE(`/posts/${id}`)
   if (resp.code !== 200) {
     throw 'NotFound'
   }
