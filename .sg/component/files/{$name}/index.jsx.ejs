@@ -1,28 +1,22 @@
+// @flow
+
 import React, {Fragment} from 'react'
+
 <% if (useBaobab) { -%>
 import { useBranch } from 'baobab-react/hooks'
-<% } -%>
-<% if (usePropTypes) { -%>
-import PropTypes from 'prop-types'
 <% } -%>
 <% if (useLodash) { -%>
 import {  } from 'lodash'
 <% } -%>
 
-import styles from "./styles.css"
+import styles from './styles.css'
 
 export default function <%= name %>() {
-    <%_ if (useBaobab) { -%>
-    const {  } = useBranch({
-        
-    })
+  <%_ if (useBaobab) { -%>
+  const {  } = useBranch({
 
-    <%_ } -%>
-    return <Fragment>Hello, <%= name %>!</Fragment>
+  })
+
+  <%_ } -%>
+  return <Fragment>Hello, <%= name %>!</Fragment>
 }
-
-<% if (usePropTypes) { -%>
-<%= name %>.propTypes = {
-
-}
-<% } -%>

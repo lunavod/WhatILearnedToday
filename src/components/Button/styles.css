@@ -18,12 +18,13 @@
   box-shadow: 0 2px 8px var(--brand);
 }
 
-.button.round {
+.button.circle {
   width: 42px;
   padding: 0;
   display: inline-flex;
   justify-content: center;
   align-content: center;
+  border-radius: 50%;
 }
 
 .accent {

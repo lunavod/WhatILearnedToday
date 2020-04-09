@@ -3,7 +3,6 @@
   "variables": {
     "name": ["string", "NewComponent", "How to name a component?"],
     "useBaobab": ["bool", false, "Use babobab (branch)?"],
-    "usePropTypes": ["bool", true, "Use PropTypes?"],
-    "useLodash": ["bool", false, "Import lodash?"]
+    "usePropTypes": ["bool", true, "Use PropTypes?"]
   }
 }

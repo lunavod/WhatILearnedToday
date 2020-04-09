@@ -5,7 +5,7 @@ import chalk from 'chalk'
 declare var globalThis: {
   api_key: string | void,
   localStorage: any,
-  process: { env: { API: string } },
+  ENV: { API: string },
 }
 
 async function POST(url: string, data?: any, signal: any): Promise<any> {
@@ -16,8 +16,8 @@ async function POST(url: string, data?: any, signal: any): Promise<any> {
     }
   }
 
-  console.log(chalk.greenBright(`API POST - ${process.env.API + url}`))
-  const response = await fetch(process.env.API + url, {
+  console.log(chalk.greenBright(`API POST - ${ENV.API + url}`))
+  const response = await fetch(globalThis.ENV.API + url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -37,8 +37,8 @@ async function GET(url: string, data?: any, signal: any): Promise<any> {
       api_key: globalThis.api_key,
     }
   }
-  console.log(chalk.greenBright(`API GET - ${process.env.API + url}`))
-  const response = await fetch(process.env.API + url, {
+  console.log(chalk.greenBright(`API GET - ${globalThis.ENV.API + url}`))
+  const response = await fetch(globalThis.ENV.API + url, {
     method: 'GET',
     signal,
   })
@@ -53,8 +53,8 @@ async function DELETE(url: string, data?: any, signal: any): Promise<any> {
       api_key: globalThis.api_key,
     }
   }
-  console.log(chalk.greenBright(`API DELETE - ${process.env.API + url}`))
-  const response = await fetch(ENV.API + url, {
+  console.log(chalk.greenBright(`API DELETE - ${globalThis.ENV.API + url}`))
+  const response = await fetch(globalThis.ENV.API + url, {
     method: 'delete',
     headers: {
       'Content-Type': 'application/json',
@@ -73,9 +73,8 @@ async function PATCH(url: string, data?: any, signal: any): Promise<any> {
       api_key: globalThis.api_key,
     }
   }
-  console.log(process, globalThis)
-  console.log(chalk.greenBright(`API PATCH - ${ENV.API + url}`))
-  const response = await fetch(ENV.API + url, {
+  console.log(chalk.greenBright(`API PATCH - ${globalThis.ENV.API + url}`))
+  const response = await fetch(globalThis.ENV.API + url, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -92,7 +91,7 @@ export async function addPost(
   text: string,
   original_text: string
 ): Promise<any> {
-  return await POST('http://localhost:9999/posts', {
+  return await POST('/posts', {
     post: { title, text, original_text },
   })
 }

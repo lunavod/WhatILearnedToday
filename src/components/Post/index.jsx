@@ -1,13 +1,18 @@
+// @flow
+
 import React, { Fragment, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { getUser, deletePost } from '../../api'
+import { deletePost, getPosts } from '../../api'
+import { addNotification } from '../../actions/notifications'
 
 import EditPostModal from '../EditPostModal'
 import Confirm from '../Confirm'
 
 import styles from './styles.css'
+import { useBranch } from 'baobab-react/hooks'
 
 export default function Post({ post }) {
+  const { dispatch } = useBranch({})
   const user = post.creator || {}
   const [isEditActive, setIsEditActive] = useState(false)
   const [isConfirmShown, setIsConfirmShown] = useState(false)
@@ -24,7 +29,11 @@ export default function Post({ post }) {
 
   const onDeleteAccept = async () => {
     await deletePost(post.id)
-    location.reload()
+    const posts = await getPosts()
+    dispatch((tree) => {
+      tree.select('posts').set(posts)
+    })
+    dispatch(addNotification('Пост удален!'))
   }
 
   const onDeleteDeny = () => {
@@ -58,10 +67,10 @@ export default function Post({ post }) {
           </div>
           <div styleName="actions">
             <a href="#" onClick={onDeleteClick}>
-              <i className="far fa-trash"></i>
+              <i className="far fa-trash" />
             </a>
             <a href="#" onClick={onEditClick}>
-              <i className="far fa-edit"></i>
+              <i className="far fa-edit" />
             </a>
           </div>
         </header>
@@ -70,10 +79,8 @@ export default function Post({ post }) {
           dangerouslySetInnerHTML={{ __html: post.text }}
         />
       </div>
-      {isEditActive ? (
+      {isEditActive && (
         <EditPostModal post={post} close={() => setIsEditActive(false)} />
-      ) : (
-        ''
       )}
     </Fragment>
   )

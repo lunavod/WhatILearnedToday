@@ -1,16 +1,23 @@
-import React, { Fragment } from 'react'
-import { useBranch } from 'baobab-react/hooks'
+// @flow
+
+import React, { Fragment, useState } from 'react'
+import AddPostModal from '../../components/AddPostModal'
 
 import styles from './styles.css'
 
 export default function FloatActions() {
-  const { dispatch } = useBranch({})
+  const [showModal, setShowModal] = useState(false)
+
+  const closeModal = () => setShowModal(false)
 
   return (
-    <div styleName="wrapper">
-      <div styleName="button">
-        <i className="far fa-pencil" />
+    <Fragment>
+      <div styleName="wrapper">
+        <div styleName="button" onClick={() => setShowModal(true)}>
+          <i className="far fa-pencil" />
+        </div>
       </div>
-    </div>
+      {showModal && <AddPostModal close={closeModal} />}
+    </Fragment>
   )
 }

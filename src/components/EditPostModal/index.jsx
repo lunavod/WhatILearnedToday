@@ -10,6 +10,7 @@ import Confirm from '../Confirm'
 
 import styles from './styles.css'
 import { editPost } from '../../api'
+import PostPreview from '../PostPreview'
 
 export default function EditPostModal({
   post,
@@ -83,46 +84,39 @@ export default function EditPostModal({
           />
 
           <div styleName="confirmations">
-            {isResetConfirmActive && text !== post.text ? (
+            {isResetConfirmActive && text !== post.text && (
               <Confirm
                 text="У вас есть несохраненные изменения. Вы уверены, что хотите их отменить?"
                 onAccept={onResetAccept}
                 onDeny={onResetDeny}
               />
-            ) : (
-              ''
             )}
-            {isCloseConfirmActive && text !== post.text ? (
+            {isCloseConfirmActive && text !== post.text && (
               <Confirm
                 text="У вас есть несохраненные изменения. Вы уверены, что хотите завершить редактирование?"
                 onAccept={onCloseAccept}
                 onDeny={onCloseDeny}
               />
-            ) : (
-              ''
             )}
           </div>
 
           <div styleName="actions">
-            <Button onClick={onResetClick} shadow accent round>
-              <i className="fas fa-undo"></i>
+            <Button onClick={onResetClick} shadow accent circle>
+              <i className="fas fa-undo" />
             </Button>
             <Button
               onClick={onPublishClick}
               shadow
-              round
+              circle
               style={{ marginLeft: '24px' }}
             >
-              <i className="fas fa-check"></i>
+              <i className="fas fa-check" />
             </Button>
           </div>
         </div>
-        <div styleName="preview">
-          <div styleName="previewTitle">{title}</div>
-          <div
-            styleName="previewText"
-            dangerouslySetInnerHTML={{ __html: text }}
-          />
+
+        <div styleName="previewWrapper">
+          <PostPreview title={title} text={text} />
         </div>
       </div>
     </Modal>

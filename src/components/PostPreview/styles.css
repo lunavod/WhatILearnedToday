@@ -1,0 +1,15 @@
+.preview {
+
+}
+
+.previewTitle {
+    padding: 24px;
+    padding-bottom: 0;
+    font-size: 1.5em;
+}
+
+.previewText {
+    padding: 24px;
+    font-size: 18px;
+    line-height: 1.5em;
+}

@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import { useBranch } from 'baobab-react/hooks'
-import AddPost from '../../components/AddPost'
 import Posts from '../../components/Posts'
 import { getPosts, addPost } from '../../api'
 
@@ -11,15 +10,10 @@ export function Controller() {
     loggedIn: ['logInData', 'loggedIn'],
   })
 
-  const publish = async (title, text, original_text) => {
-    await addPost(title, text, original_text)
-    const newPosts = await getPosts()
-    dispatch((tree) => tree.select('posts').set(newPosts))
-  }
+  const publish = async (title, text, original_text) => {}
 
   return (
     <Fragment>
-      {/*{loggedIn ? <AddPost onSubmit={publish} /> : ''}*/}
       <Posts />
     </Fragment>
   )

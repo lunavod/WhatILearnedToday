@@ -25,7 +25,7 @@
 
 :root {
   --button-size: 32px;
-  --editor-padding: 6px;
+  --editor-padding: 25px;
   --border-radius: 5px;
 }
 
@@ -96,7 +96,7 @@ baka-editor {
   position: absolute;
   width: 100%;
   height: auto;
-  top: 7px;
+  top: 25px;
   left: calc(var(--editor-padding) + 2px + var(--button-size));
   opacity: 0.6;
   z-index: 0;

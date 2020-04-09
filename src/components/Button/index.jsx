@@ -9,6 +9,7 @@ import syles from './styles.css'
 export default function Button({
   children,
   round,
+  circle,
   accent,
   secondary,
   shadow,
@@ -16,12 +17,13 @@ export default function Button({
   onClick,
 }: {
   children: {},
-  round: boolean,
-  accent: boolean,
-  secondary: boolean,
-  shadow: boolean,
-  style: {},
-  onClick: (e) => {},
+  round?: boolean,
+  circle?: boolean,
+  accent?: boolean,
+  secondary?: boolean,
+  shadow?: boolean,
+  style?: {},
+  onClick?: (e) => {},
 }) {
   return (
     <button
@@ -30,6 +32,7 @@ export default function Button({
       styleName={classNames({
         button: true,
         round,
+        circle,
         accent,
         secondary,
         shadow,

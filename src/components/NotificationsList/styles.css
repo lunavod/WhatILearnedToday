@@ -2,6 +2,6 @@
   display: flex;
   flex-direction: column;
   position: fixed;
-  right: 16px;
-  top: 16px;
+  left: 16px;
+  bottom: 8px;
 }

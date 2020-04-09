@@ -5,6 +5,7 @@ import { useRoot } from 'baobab-react/hooks'
 import Sidebar from '../Sidebar'
 import Navbar from '../Navbar'
 import NotificationsList from '../NotificationsList'
+import LoginActionsModal from '../LoginActionsModal'
 
 import getRouteForUrl from '../../routing'
 
@@ -39,6 +40,7 @@ export default function App({
           </div>
         </div>
       </div>
+      <LoginActionsModal />
     </Root>
   )
 }

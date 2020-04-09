@@ -1,9 +1,17 @@
+// @flow
+
 import React, { Fragment, useEffect, useRef } from 'react'
-import PropTypes from 'prop-types'
 
-import syles from './styles.css'
+import styles from './styles.css'
 
-export default function Modal({ children, isOpen, close }) {
+type PropTypes = {
+  children: {},
+  isOpen: boolean,
+  close: () => {},
+  style?: {},
+}
+
+export default function Modal({ children, isOpen, close, style }: PropTypes) {
   if (!isOpen) return <Fragment />
 
   const wrapperRef = useRef()
@@ -21,12 +29,9 @@ export default function Modal({ children, isOpen, close }) {
 
   return (
     <div styleName="wrapper" ref={wrapperRef}>
-      <div styleName="container">{children}</div>
+      <div styleName="container" style={style}>
+        {children}
+      </div>
     </div>
   )
-}
-
-Modal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  close: PropTypes.func,
 }
