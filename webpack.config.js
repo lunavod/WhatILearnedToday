@@ -10,7 +10,7 @@ const client = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    chunkFilename: '[name].bundle.js'
+    chunkFilename: '[name].bundle.js',
   },
   module: {
     rules: [
@@ -24,13 +24,13 @@ const client = {
             plugins: [
               ['@babel/plugin-transform-runtime'],
               '@babel/plugin-proposal-object-rest-spread',
-              '@babel/plugin-proposal-class-properties'
-            ]
-          }
-        }
+              '@babel/plugin-proposal-class-properties',
+            ],
+          },
+        },
       },
       {
-        test: /\.css$/i,
+        test: /.+(?<!global)\.css/i,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -40,16 +40,28 @@ const client = {
               modules: {
                 mode: 'local',
                 localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
-                context: path.resolve(__dirname)
-              }
-            }
-          }
-        ]
-      }
-    ]
+                context: path.resolve(__dirname),
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /.+\.global\.css/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+        ],
+      },
+    ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx'],
   },
   devtool: 'source-map',
   plugins: [
@@ -57,16 +69,16 @@ const client = {
     new webpack.DefinePlugin(
       {
         SERVER_BUILD: false,
-        CLIENT_BUILD: true
+        CLIENT_BUILD: true,
       },
       new LodashModuleReplacementPlugin()
-    )
+    ),
   ],
   optimization: {
     splitChunks: {
-      chunks: 'all'
-    }
-  }
+      chunks: 'all',
+    },
+  },
 }
 
 const server = {
@@ -77,7 +89,7 @@ const server = {
     filename: 'serverBundle.js',
     path: path.resolve(__dirname, 'dist'),
     library: 'serverBundle',
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'commonjs2',
   },
   module: {
     rules: [
@@ -91,10 +103,10 @@ const server = {
             plugins: [
               ['@babel/plugin-transform-runtime'],
               '@babel/plugin-proposal-object-rest-spread',
-              '@babel/plugin-proposal-class-properties'
-            ]
-          }
-        }
+              '@babel/plugin-proposal-class-properties',
+            ],
+          },
+        },
       },
       {
         test: /\.css$/i,
@@ -107,16 +119,16 @@ const server = {
               modules: {
                 mode: 'local',
                 localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
-                context: path.resolve(__dirname)
-              }
-            }
-          }
-        ]
-      }
-    ]
+                context: path.resolve(__dirname),
+              },
+            },
+          },
+        ],
+      },
+    ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx'],
   },
   externals: [nodeExternals()],
   devtool: 'source-map',
@@ -125,21 +137,21 @@ const server = {
       banner: 'require("source-map-support").install();',
       raw: true,
       entryOnly: false,
-      exclude: /.+\.css/gm
+      exclude: /.+\.css/gm,
     }),
     new webpack.ProvidePlugin({
       _: 'lodash',
-      fetch: 'node-fetch'
+      fetch: 'node-fetch',
     }),
     new MiniCssExtractPlugin(),
     new webpack.DefinePlugin(
       {
         SERVER_BUILD: true,
-        CLIENT_BUILD: false
+        CLIENT_BUILD: false,
       },
       new LodashModuleReplacementPlugin()
-    )
-  ]
+    ),
+  ],
 }
 
 module.exports = [client, server]

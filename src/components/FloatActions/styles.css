@@ -12,10 +12,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /*color: white;*/
-    /*background: var(--brand);*/
-    /*box-shadow: 0 2px 16px var(--brand);*/
     background: var(--accent);
     box-shadow: 0 2px 8px #e0b300;
     color: var(--brand);
+    cursor: pointer;
 }

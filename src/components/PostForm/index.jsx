@@ -1,53 +1,50 @@
-import React, { Fragment, useEffect, useRef } from 'react'
-import { useObserver } from '../../utils/hooks'
-import PropTypes from 'prop-types'
+// @flow
 
+import React, { Fragment, useEffect, useRef } from 'react'
 import styles from './styles.css'
+import './editor.global.css'
+
+type PropTypes = {
+  title: string,
+  setTitle: (title: string) => {},
+
+  setText: (text: string) => {},
+
+  originalText: string,
+  setOriginalText: (originalText: string) => {},
+}
 
 export default function PostForm({
   title,
   setTitle,
-  text,
   setText,
   originalText,
   setOriginalText,
-  prefix,
-}) {
-  const contentRef = useRef(null)
-  const originalContentRef = useRef(null)
+}: PropTypes) {
   const editorRef = useRef(null)
-
-  useObserver(contentRef, ['value'], () => {
-    setText(contentRef.current.value)
-    setOriginalText(originalContentRef.current.value)
-  })
 
   useEffect(() => {
     let editor = editorRef.current
-    if (originalText === originalContentRef.current.value) return
+    if (originalText === editor.document.text) return
     editor.setText(originalText)
   }, [originalText])
 
   useEffect(() => {
     let editor = editorRef.current
-    editor.originalOutputContainer = originalContentRef.current
-    editor.outputContainer = contentRef.current
+    editor.addEventListener('change', (e) => {
+      setText(e.detail.html)
+      setOriginalText(e.detail.original)
+    })
   })
 
   return (
-    <div styleName="wrapper">
+    <div className={styles.wrapper}>
       <input
         type="text"
-        styleName="title"
+        className={styles.title}
         placeholder="Дорогая принцесса Селестия..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-      />
-      <input type="hidden" id={`${prefix}_content`} ref={contentRef} />
-      <input
-        type="hidden"
-        id={`${prefix}_original_content`}
-        ref={originalContentRef}
       />
       <baka-editor
         ref={editorRef}
@@ -56,5 +53,3 @@ export default function PostForm({
     </div>
   )
 }
-
-PostForm.propTypes = {}

@@ -2,6 +2,8 @@
 
 import React from 'react'
 
+import PostContent from '../PostContent'
+
 import styles from './styles.css'
 
 type PropTypes = {
@@ -13,7 +15,9 @@ export default function PostPreview({ title, text }: PropTypes) {
   return (
     <div styleName="preview">
       <div styleName="previewTitle">{title}</div>
-      <div styleName="previewText" dangerouslySetInnerHTML={{ __html: text }} />
+      <div styleName="previewText">
+        <PostContent content={text} />
+      </div>
     </div>
   )
 }

@@ -1,0 +1,41 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/solarized-dark.min.css);
+
+:global {
+
+}
+
+.content {
+
+}
+
+.content :global(.code) {
+    border-radius: 10px;
+    box-shadow: 0 3px 24px rgba(0, 0, 0, 0.49);
+    padding: 1em;
+    color: #839496;
+    background: #002b36;
+    display: block;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+.content blockquote {
+    border-left: 2px solid var(--brand);
+    background: rgba(0,0,255,.1);
+    margin: 0;
+    padding: 16px;
+}
+
+.content :global(.monospace) {
+    background: rgba(0,0,2555, .1);
+    padding: 0 4px;
+    border-radius: 4px;
+    font-family: monospace;
+    display: inline-block;
+}
+
+.content h1,
+.content h2 {
+    white-space: pre-wrap;
+    margin: 16px 0 12px 0;
+}

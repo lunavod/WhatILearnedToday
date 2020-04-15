@@ -68,7 +68,11 @@ export default function EditPostModal({
   }
 
   return (
-    <Modal isOpen={true} close={onClose}>
+    <Modal
+      isOpen={true}
+      close={onClose}
+      style={{ width: '100%', maxWidth: '1832px' }}
+    >
       <div styleName="wrapper">
         <div styleName="edit">
           <PostForm

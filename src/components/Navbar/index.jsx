@@ -8,9 +8,8 @@ import classNames from 'classnames'
 import styles from './styles.css'
 
 export default function Navbar() {
-  const { logInData, user, dispatch } = useBranch({
+  const { logInData, dispatch } = useBranch({
     logInData: 'logInData',
-    user: 'currentUser',
   })
 
   const logOut = () => {
@@ -47,7 +46,7 @@ export default function Navbar() {
         <NavbarItem name="posts" href="/">
           Посты
         </NavbarItem>
-        <NavbarItem name="users">Пользователи</NavbarItem>
+        {/*<NavbarItem name="users">Пользователи</NavbarItem>*/}
       </div>
     </div>
   )

@@ -11,6 +11,8 @@ import Confirm from '../Confirm'
 import styles from './styles.css'
 import { useBranch } from 'baobab-react/hooks'
 
+import PostContent from '../PostContent'
+
 export default function Post({ post }) {
   const { dispatch } = useBranch({})
   const user = post.creator || {}
@@ -24,7 +26,7 @@ export default function Post({ post }) {
 
   const onDeleteClick = async (e) => {
     e.preventDefault()
-    setIsConfirmShown(true)
+    setIsConfirmShown(!isConfirmShown)
   }
 
   const onDeleteAccept = async () => {
@@ -42,14 +44,12 @@ export default function Post({ post }) {
 
   return (
     <Fragment>
-      {isConfirmShown ? (
+      {isConfirmShown && (
         <Confirm
           text="Вы уверены что хотите удалить этот пост?"
           onAccept={onDeleteAccept}
           onDeny={onDeleteDeny}
         />
-      ) : (
-        ''
       )}
       <div styleName="post">
         <header>
@@ -74,10 +74,9 @@ export default function Post({ post }) {
             </a>
           </div>
         </header>
-        <div
-          styleName="content"
-          dangerouslySetInnerHTML={{ __html: post.text }}
-        />
+        <div styleName="content">
+          <PostContent content={post.text} />
+        </div>
       </div>
       {isEditActive && (
         <EditPostModal post={post} close={() => setIsEditActive(false)} />

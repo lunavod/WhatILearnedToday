@@ -1,0 +1,3 @@
+[submodule "src/utils/BakaEditor"]
+	path = src/utils/BakaEditor
+	url = https://github.com/lunavod/BakaEditor.git

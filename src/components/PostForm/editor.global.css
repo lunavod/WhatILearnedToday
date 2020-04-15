@@ -1,0 +1,198 @@
+:root {
+    --button-size: 32px;
+    --editor-padding: 25px;
+    --border-radius: 5px;
+}
+
+
+#wrapper {
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    position: relative;
+}
+
+#buttons {
+    width: var(--button-size);
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 255, 0.03);
+    border-right: 1px solid rgba(0, 0, 255, 0.06);
+}
+
+#buttons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--button-size);
+    height: var(--button-size);
+    text-decoration: none;
+    font-size: 1.2em;
+    color: rgba(0, 0, 255, 0.3);
+    transition: color 0.2s;
+    position: relative;
+}
+
+#buttons a:focus {
+    outline: 0;
+}
+
+#buttons a.active {
+    color: #ffd324;
+}
+
+#buttons a svg {
+    height: 0.9em;
+}
+
+#buttons #bold {
+    font-weight: bold;
+}
+
+#buttons #italic {
+    font-style: italic;
+}
+
+#buttons #strike {
+    text-decoration: line-through;
+}
+
+#buttons #underline {
+    text-decoration: underline;
+}
+
+#buttons #monospace {
+    font-family: Monospace, monospace;
+    font-size: 1.4em;
+}
+
+#buttons #code,
+#buttons #header_first,
+#buttons #header_second {
+    font-size: 0.9em;
+}
+
+#buttons .delimiter {
+    height: 16px;
+}
+
+#buttons .popup {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: calc(100% + 8px);
+    padding: 6px;
+    border: 1px solid #ddddff;
+    background: #f7f7ff;
+    z-index: 2000;
+    cursor: default;
+}
+
+#buttons .active .popup {
+    display: block;
+}
+
+#buttons .popup .url {
+    margin-bottom: 6px;
+}
+
+#buttons .popup input {
+    padding: 4px;
+    font-size: 14px;
+}
+
+#placeholder {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: var(--editor-padding);
+    left: calc(var(--editor-padding) + 1px + var(--button-size));
+    opacity: 0.6;
+    z-index: 0;
+}
+
+#placeholder.invisible {
+    opacity: 0;
+}
+
+#editor {
+    width: 100%;
+    height: auto;
+    min-height: 250px;
+    padding: calc(var(--editor-padding) - 1px);
+    background: transparent;
+    z-index: 1;
+    /*border-radius: 0px var(--border-radius) var(--border-radius) 0;*/
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+#editor {
+    white-space: pre-wrap;
+}
+
+#editor:focus {
+    outline: 0px solid transparent;
+    border-color: rgba(0, 0, 255, 0.24);
+}
+
+#editor .empty {
+    height: 1em;
+}
+
+#editor:active {
+    outline: none;
+}
+
+#editor .monospace {
+    font-family: Monospace, monospace;
+    background: rgba(0,0,2555, .1);
+    padding: 2px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+#editor .service {
+    filter: opacity(50%);
+
+}
+
+#editor .code {
+    color: #53bf6b;
+}
+
+#editor h1,
+#editor h2 {
+    white-space: pre-wrap;
+    display: inline;
+    margin: 16px 0 8px 0;
+}
+
+#editor blockquote {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    color: #419eff;
+}
+
+#editor .service_link_title {
+    color: violet;
+}
+
+#editor .service_image_title {
+    color: darkorange;
+}
+
+/* ------------------------------------------------------------ */
+
+baka-editor {
+    height: 100%;
+}
+
+#editor:focus {
+    border-color:  white;
+}

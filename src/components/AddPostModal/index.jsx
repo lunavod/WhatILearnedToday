@@ -32,6 +32,7 @@ export default function AddPost({ close }: PropTypes) {
     setTitle('')
     setText('')
     setOriginalText('')
+    close()
   }
 
   const onClose = () => {
