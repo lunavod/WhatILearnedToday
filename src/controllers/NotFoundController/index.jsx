@@ -1,9 +1,16 @@
+// @flow
+
 import React, { Fragment } from 'react'
 
-import syles from './styles.css'
+import styles from './styles.css'
 
 export function Controller() {
-  return <Fragment>Hello, NotFoundController!</Fragment>
+  return (
+    <div styleName={'wrapper'}>
+      <h1>Ошибка 404</h1>
+      Страница не найдена
+    </div>
+  )
 }
 
 export async function loadData() {}

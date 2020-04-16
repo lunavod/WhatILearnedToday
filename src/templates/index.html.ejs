@@ -16,6 +16,7 @@
   </body>
   <script>
       globalThis.ENV = {API: '<%= process.env.API %>'}
+      globalThis.pathname = '<%= pathname %>'
     const initialState = <%= dehydratedState %>
     window.hydrateApp(initialState)
   </script>

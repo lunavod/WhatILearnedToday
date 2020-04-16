@@ -39,16 +39,24 @@ app.get('*', async function (req, res) {
 
   globalThis.api_key = tree.select('logInData', 'api_key').get()
 
-  const route = getRouteForUrl(req.originalUrl)
-  await route.loadData(tree, route.data)
-  await route.default.loadData(tree)
+  let route = getRouteForUrl(req.originalUrl)
+  let pathname = req.originalUrl
+
+  try {
+    await route.loadData(tree, route.data)
+    await route.default.loadData(tree)
+  } catch (err) {
+    if (err !== 'NotFound') throw err
+    route = getRouteForUrl('404')
+    pathname = '404'
+  }
 
   const dehydratedContent = ReactDOMServer.renderToString(
-    React.createElement(App, { store: tree, pathname: req.originalUrl })
+    React.createElement(App, { store: tree, pathname, route })
   )
   const dehydratedState = JSON.stringify(tree.get())
 
-  res.send(template({ dehydratedContent, dehydratedState }))
+  res.send(template({ dehydratedContent, dehydratedState, pathname }))
 
   console.log(
     chalk.gray(`[${dateFormat(new Date(), 'h:MM:ss')}]`),

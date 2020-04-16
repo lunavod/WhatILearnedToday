@@ -18,9 +18,9 @@ export default function App({
   store: {},
   pathname: string,
 }) {
-  if (!pathname) pathname = location.pathname
+  if (!pathname) pathname = globalThis.pathname
   const Root = useRoot(store)
-  const route = getRouteForUrl(pathname)
+  let route = getRouteForUrl(pathname)
   const Page = route.Controller
 
   return (
