@@ -57,6 +57,7 @@ const client = {
             },
           },
         ],
+        sideEffects: true,
       },
     ],
   },
@@ -109,7 +110,7 @@ const server = {
         },
       },
       {
-        test: /\.css$/i,
+        test: /.+(?<!global)\.css/i,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -124,6 +125,19 @@ const server = {
             },
           },
         ],
+      },
+      {
+        test: /.+\.global\.css/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+        ],
+        sideEffects: true,
       },
     ],
   },

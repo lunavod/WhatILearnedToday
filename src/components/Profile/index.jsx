@@ -13,21 +13,22 @@ type Branch = {
     username: string,
     email: string,
     avatar?: string,
-    created_at: string
-  }
+    created_at: string,
+  },
 }
 
 export default function Profile() {
   const { profile }: Branch = useBranch({
-    profile: ['profile']
+    profile: ['profile'],
   })
 
   return (
     <div styleName="wrapper">
       <img
         src={
-          profile.avatar ||
-          'https://skynetgaming.net/uploads/monthly_2020_03/Capture.thumb.PNG.7162eef397706a6f76dc1faf18b414c8.PNG'
+          profile.avatar_url
+            ? globalThis.ENV.API + profile.avatar_url
+            : '/public/images/default_avatar.png'
         }
         styleName="avatar"
       />
@@ -44,13 +45,10 @@ export default function Profile() {
             <span styleName="thumbsup">{'👍'}</span>
           </div>
         </div>
-        <div styleName="bottom">
-          Nullam efficitur lacus sit amet nisl ultricies vestibulum. Integer
-          varius massa sed est aliquam, vel hendrerit sapien sodales. Nunc
-          libero erat, eleifend at odio eu, tempus egestas nibh. Integer sed
-          hendrerit nisl, in vestibulum felis. Ut egestas ut leo vel vehicula.
-          Nunc ac velit vel nulla tincidunt tristique.
-        </div>
+        <div
+          styleName="bottom"
+          dangerouslySetInnerHTML={{ __html: profile.description }}
+        ></div>
       </div>
     </div>
   )

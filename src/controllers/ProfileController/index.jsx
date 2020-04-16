@@ -6,13 +6,22 @@ import { getUser, getUserPosts } from '../../api'
 
 import Posts from '../../components/Posts'
 import Profile from '../../components/Profile'
+import EditProfile from '../../components/EditProfile'
 
-import syles from './styles.css'
+import styles from './styles.css'
 
 export function Controller() {
+  const { currentUser, profile } = useBranch({
+    currentUser: 'currentUser',
+    profile: 'profile',
+  })
   return (
     <Fragment>
-      <Profile />
+      {currentUser && currentUser.id === profile.id ? (
+        <EditProfile />
+      ) : (
+        <Profile />
+      )}
       <Posts />
     </Fragment>
   )

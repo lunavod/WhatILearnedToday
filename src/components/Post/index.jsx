@@ -14,7 +14,10 @@ import { useBranch } from 'baobab-react/hooks'
 import PostContent from '../PostContent'
 
 export default function Post({ post }) {
-  const { dispatch } = useBranch({})
+  const { dispatch, loggedIn } = useBranch({
+    loggedIn: ['logInData', 'loggedIn'],
+  })
+
   const user = post.creator || {}
   const [isEditActive, setIsEditActive] = useState(false)
   const [isConfirmShown, setIsConfirmShown] = useState(false)
@@ -56,22 +59,28 @@ export default function Post({ post }) {
           <img
             styleName="avatar"
             src={
-              'https://skynetgaming.net/uploads/monthly_2020_03/Capture.thumb.PNG.7162eef397706a6f76dc1faf18b414c8.PNG'
+              user.avatar_url
+                ? globalThis.ENV.API + user.avatar_url
+                : '/public/images/default_avatar.png'
             }
           />
           <div styleName="top_info_wrapper">
             <div styleName="title">{post.title}</div>
-            <a href={`/user/${user.id}`} styleName="username">
+            <a href={`/users/${user.username}`} styleName="username">
               {user.username}
             </a>
           </div>
           <div styleName="actions">
-            <a href="#" onClick={onDeleteClick}>
-              <i className="far fa-trash" />
-            </a>
-            <a href="#" onClick={onEditClick}>
-              <i className="far fa-edit" />
-            </a>
+            {loggedIn && (
+              <Fragment>
+                <a href="#" onClick={onDeleteClick}>
+                  <i className="far fa-trash" />
+                </a>
+                <a href="#" onClick={onEditClick}>
+                  <i className="far fa-edit" />
+                </a>
+              </Fragment>
+            )}
           </div>
         </header>
         <div styleName="content">

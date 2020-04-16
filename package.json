@@ -69,6 +69,7 @@
     "js-cookie": "^2.2.1",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
+    "nord-highlightjs": "^0.1.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "source-map-explorer": "^2.4.1",

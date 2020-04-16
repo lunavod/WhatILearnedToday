@@ -86,6 +86,31 @@ async function PATCH(url: string, data?: any, signal: any): Promise<any> {
   return await response.json()
 }
 
+async function PATCH_FORM(url: string, data?: any, signal: any): Promise<any> {
+  if (globalThis.api_key) {
+    data = {
+      ...data,
+      api_key: globalThis.api_key,
+    }
+  }
+  console.log(chalk.greenBright(`API PATCH - ${globalThis.ENV.API + url}`))
+
+  const body = new FormData()
+
+  Object.keys(data).forEach((key) => {
+    if (!data[key]) return
+    body.set(key, data[key])
+  })
+
+  const response = await fetch(globalThis.ENV.API + url, {
+    method: 'PATCH',
+    body,
+    signal,
+  })
+
+  return await response.json()
+}
+
 export async function addPost(
   title: string,
   text: string,
@@ -172,4 +197,25 @@ export async function deletePost(id: number): Promise<void> {
     throw 'NotFound'
   }
   return resp
+}
+
+export async function editUser(
+  id: number,
+  description: string,
+  original_description: string,
+  avatar?: Blob
+): Promise<any> {
+  // const resp1 = await PATCH(`/users/${id.toString()}`, {
+  //   user: { description, original_description },
+  // })
+  //
+  // if (resp1.code !== 200 || !avatar) return resp1
+
+  const resp2 = await PATCH_FORM(`/users/${id.toString()}`, {
+    'user[avatar]': avatar,
+    'user[description]': description,
+    'user[original_description]': original_description,
+  })
+
+  return resp2
 }

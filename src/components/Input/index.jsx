@@ -1,14 +1,29 @@
+// @flow
+
 import React, { useState, useRef } from 'react'
-import PropTypes from 'prop-types'
 
 import classNames from 'classnames'
 
-import syles from './styles.css'
+import styles from './styles.css'
 
-export default function Input({ placeholder, type, onChange, accent }) {
+type PropTypes = {
+  initialValue?: string,
+  placeholder?: string,
+  type?: string,
+  onChange?: () => {},
+  accent?: boolean,
+}
+
+export default function Input({
+  initialValue,
+  placeholder,
+  type,
+  onChange,
+  accent,
+}: PropTypes) {
   const [focused, setFocused] = useState(false)
 
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(initialValue || '')
 
   const inputRef = useRef()
 
@@ -18,7 +33,7 @@ export default function Input({ placeholder, type, onChange, accent }) {
         wrapper: true,
         active: focused,
         not_empty: value,
-        accent: accent
+        accent: accent,
       })}
     >
       <div styleName="placeholder" onClick={() => inputRef.current.focus()}>
@@ -26,7 +41,7 @@ export default function Input({ placeholder, type, onChange, accent }) {
       </div>
       <input
         ref={inputRef}
-        onChange={e => {
+        onChange={(e) => {
           setValue(e.target.value)
           onChange(e)
         }}
@@ -38,5 +53,3 @@ export default function Input({ placeholder, type, onChange, accent }) {
     </div>
   )
 }
-
-Input.propTypes = {}

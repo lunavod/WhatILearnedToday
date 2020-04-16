@@ -35,6 +35,8 @@ app.get('*', async function (req, res) {
       .set(JSON.parse(req.cookies[`__stored_${options.name}`]))
   }
 
+  console.log(tree.select('logInData').get())
+
   globalThis.api_key = tree.select('logInData', 'api_key').get()
 
   const route = getRouteForUrl(req.originalUrl)

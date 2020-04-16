@@ -9,13 +9,16 @@
 }
 
 .avatar {
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
+  max-width: 160px;
+  max-height: 160px;
   border-radius: 50%;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.4);
 }
 
 .data_wrapper {
+  width: 100%;
   margin-left: 16px;
 }
 

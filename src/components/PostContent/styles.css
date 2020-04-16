@@ -1,4 +1,4 @@
-@import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/solarized-dark.min.css);
+@import url(https://cdn.jsdelivr.net/npm/nord-highlightjs@0.1.0/dist/nord.min.css);
 
 :global {
 
@@ -10,19 +10,20 @@
 
 .content :global(.code) {
     border-radius: 10px;
-    box-shadow: 0 3px 24px rgba(0, 0, 0, 0.49);
+    box-shadow: 0 1px 14px #2e3440;
     padding: 1em;
-    color: #839496;
-    background: #002b36;
+    color: #d8dee9;
+    background: #2e3440;
     display: block;
     overflow-x: auto;
     white-space: pre-wrap;
+    margin: 14px 0;
 }
 
 .content blockquote {
     border-left: 2px solid var(--brand);
     background: rgba(0,0,255,.1);
-    margin: 0;
+    margin: 14px 0;
     padding: 16px;
 }
 

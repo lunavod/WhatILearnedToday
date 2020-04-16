@@ -12,14 +12,14 @@ const defaultController = {
     }
     const user = await getUser(tree.select('logInData', 'id').get())
     tree.select(['currentUser']).set(user)
-  }
+  },
 }
 
 const routing = {
   '/$': IndexController,
-  '/user/(.+)': ProfileController,
+  '/users/(.+)': ProfileController,
 
-  '404': NotFoundController
+  '404': NotFoundController,
 }
 
 export default function getRouteForUrl(url: string): any {
