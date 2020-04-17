@@ -12,6 +12,9 @@ type PropTypes = {
   type?: string,
   onChange?: () => {},
   accent?: boolean,
+  style?: {
+    [string]: any,
+  },
 }
 
 export default function Input({
@@ -20,6 +23,7 @@ export default function Input({
   type,
   onChange,
   accent,
+  style,
 }: PropTypes) {
   const [focused, setFocused] = useState(false)
 
@@ -49,6 +53,7 @@ export default function Input({
         type={type}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
+        style={style}
       />
     </div>
   )

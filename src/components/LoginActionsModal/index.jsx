@@ -130,7 +130,7 @@ export default function LoginActionsModal() {
   }
 
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen={isOpen} close={onCloseClick}>
       <div styleName="wrapper">
         <div styleName="left">
           <h2>Вход</h2>
@@ -163,6 +163,7 @@ export default function LoginActionsModal() {
             accent
             value={registerTexts.username}
             onChange={(e) => updateText('register', 'username', e.target.value)}
+            style={{ color: 'white' }}
           />
           <div styleName="fieldErrors">{registerUsernameErrors}</div>
           <Input
@@ -171,6 +172,7 @@ export default function LoginActionsModal() {
             accent
             value={registerTexts.email}
             onChange={(e) => updateText('register', 'email', e.target.value)}
+            style={{ color: 'white' }}
           />
           <div styleName="fieldErrors">{registerEmailErrors}</div>
           <Input
@@ -179,6 +181,7 @@ export default function LoginActionsModal() {
             accent
             value={registerTexts.password}
             onChange={(e) => updateText('register', 'password', e.target.value)}
+            style={{ color: 'white' }}
           />
           <div styleName="fieldErrors">{registerPasswordErrors}</div>
           <Button
