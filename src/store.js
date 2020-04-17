@@ -23,7 +23,7 @@ const initialData = {
       },
     },
     InvitesModal: {
-      isOpen: true,
+      isOpen: false,
       invites: [],
     },
   },

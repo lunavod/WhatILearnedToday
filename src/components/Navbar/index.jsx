@@ -28,12 +28,18 @@ export default function Navbar() {
     })
   }
 
+  const openInvitesModal = () => {
+    dispatch((tree) => {
+      tree.select('modals', 'InvitesModal', 'isOpen').set(true)
+    })
+  }
+
   const logged_items = (
     <Fragment>
       <NavbarItem name="settings" href={`/users/${currentUser.username}`}>
         Профиль
       </NavbarItem>
-      <NavbarItem name="invites">Управление инвайтами</NavbarItem>
+      <NavbarItem onClick={openInvitesModal}>Управление инвайтами</NavbarItem>
       <NavbarItem onClick={logOut}>Выйти</NavbarItem>
     </Fragment>
   )
