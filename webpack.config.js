@@ -60,6 +60,10 @@ const client = {
         ],
         sideEffects: true,
       },
+      {
+        test: /\.worker\.js$/,
+        use: { loader: 'worker-loader', options: { inline: true } },
+      },
     ],
   },
   resolve: {
@@ -140,6 +144,10 @@ const server = {
           },
         ],
         sideEffects: true,
+      },
+      {
+        test: /\.worker\.js$/,
+        use: { loader: 'worker-loader', options: { inline: true } },
       },
     ],
   },

@@ -16,18 +16,12 @@ function encodeQueryData(data) {
 }
 
 async function POST(url: string, data?: any, signal: any): Promise<any> {
-  if (globalThis.api_key) {
-    data = {
-      ...data,
-      api_key: globalThis.api_key,
-    }
-  }
-
   console.log(chalk.greenBright(`API POST - ${ENV.API + url}`))
   const response = await fetch(globalThis.ENV.API + url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'X-Authorization-Bearer': globalThis.api_key,
     },
     // mode: 'no-cors',
     body: JSON.stringify(data),
@@ -38,17 +32,14 @@ async function POST(url: string, data?: any, signal: any): Promise<any> {
 }
 
 async function GET(url: string, data?: any, signal: any): Promise<any> {
-  if (globalThis.api_key) {
-    data = {
-      ...data,
-      api_key: globalThis.api_key,
-    }
-  }
   console.log(chalk.greenBright(`API GET - ${globalThis.ENV.API + url}`))
   const response = await fetch(
     globalThis.ENV.API + url + '?' + encodeQueryData(data),
     {
       method: 'GET',
+      headers: {
+        'X-Authorization-Bearer': globalThis.api_key,
+      },
       signal,
     }
   )
@@ -57,17 +48,12 @@ async function GET(url: string, data?: any, signal: any): Promise<any> {
 }
 
 async function DELETE(url: string, data?: any, signal: any): Promise<any> {
-  if (globalThis.api_key) {
-    data = {
-      ...data,
-      api_key: globalThis.api_key,
-    }
-  }
   console.log(chalk.greenBright(`API DELETE - ${globalThis.ENV.API + url}`))
   const response = await fetch(globalThis.ENV.API + url, {
     method: 'delete',
     headers: {
       'Content-Type': 'application/json',
+      'X-Authorization-Bearer': globalThis.api_key,
     },
     body: JSON.stringify(data),
     signal,
@@ -77,17 +63,12 @@ async function DELETE(url: string, data?: any, signal: any): Promise<any> {
 }
 
 async function PATCH(url: string, data?: any, signal: any): Promise<any> {
-  if (globalThis.api_key) {
-    data = {
-      ...data,
-      api_key: globalThis.api_key,
-    }
-  }
   console.log(chalk.greenBright(`API PATCH - ${globalThis.ENV.API + url}`))
   const response = await fetch(globalThis.ENV.API + url, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
+      'X-Authorization-Bearer': globalThis.api_key,
     },
     body: JSON.stringify(data),
     signal,

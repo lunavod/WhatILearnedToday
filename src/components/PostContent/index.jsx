@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect } from 'react'
 
-import hljs from 'highlight.js'
+import Worker from '../../utils/highlight.worker'
 
 import styles from './styles.css'
 
@@ -16,8 +16,11 @@ export default function PostContent({ content }: PropTypes) {
   useEffect(() => {
     const wrapper = contentRef.current
     wrapper.querySelectorAll('.code').forEach((el) => {
-      // el.innerHTML = `<div class="window">${el.innerHTML}</div>`
-      setTimeout(() => hljs.highlightBlock(el), 0)
+      const worker = new Worker('worker.js')
+      worker.onmessage = (event) => {
+        el.innerHTML = event.data
+      }
+      worker.postMessage(el.innerHTML.replace(/<br>/gm, '\n'))
     })
   })
 

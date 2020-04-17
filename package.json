@@ -48,7 +48,8 @@
     "webpack-bundle-analyzer": "^3.6.1",
     "webpack-cli": "^3.3.11",
     "webpack-node-externals": "^1.7.2",
-    "webpack-visualizer-plugin": "^0.1.11"
+    "webpack-visualizer-plugin": "^0.1.11",
+    "worker-loader": "^2.0.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
