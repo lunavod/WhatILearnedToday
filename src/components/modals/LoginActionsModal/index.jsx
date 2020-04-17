@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { useBranch } from 'baobab-react/hooks'
 import Modal from '../Modal'
-import Input from '../Input'
-import Button from '../Button'
-import { login, register } from '../../api'
+import Input from '../../Input'
+import Button from '../../Button'
+import { getUser, login, register } from '../../../api'
 
-import { addNotification } from '../../actions/notifications'
+import { addNotification } from '../../../actions/notifications'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes'
 
 import PropTypes from 'prop-types'
 
-import syles from './styles.css'
+import styles from './styles.css'
 
 export default function LoginActionsModal() {
   const { isOpen, dispatch, logInTexts, registerTexts } = useBranch({
@@ -27,6 +27,7 @@ export default function LoginActionsModal() {
   const [registerUsernameErrors, setRegisterUsernameErrors] = useState('')
   const [registerEmailErrors, setRegisterEmailErrors] = useState('')
   const [registerPasswordErrors, setRegisterPasswordErrors] = useState('')
+  const [registerInviteErrors, setRegisterInviteErrors] = useState('')
 
   const updateText = (type, name, value) => {
     dispatch((tree) => {
@@ -48,7 +49,6 @@ export default function LoginActionsModal() {
     setLogInUsernameErrors([])
     setLogInPasswordErrors([])
 
-    console.log('LogInerrors', logInErrors)
     if (resp.code === 200) {
       dispatch((tree) => {
         tree
@@ -61,7 +61,14 @@ export default function LoginActionsModal() {
           api_key: resp.result.key,
         })
       })
-      dispatch(addNotification('Вход выполнен успешно!'))
+      const setCurrentUser = async () => {
+        const user = await getUser(resp.result.session.user_id)
+        dispatch((tree) => {
+          tree.select('currentUser').set(user)
+        })
+        dispatch(addNotification('Вход выполнен успешно!'))
+      }
+      setCurrentUser()
       return
     }
 
@@ -86,7 +93,8 @@ export default function LoginActionsModal() {
     const resp = await register(
       registerTexts.username,
       registerTexts.email,
-      registerTexts.password
+      registerTexts.password,
+      registerTexts.invite
     )
     const registerErrors = resp.errors
 
@@ -106,7 +114,14 @@ export default function LoginActionsModal() {
           api_key: resp.result.key,
         })
       })
-      dispatch(addNotification('Вход выполнен успешно!'))
+      const setCurrentUser = async () => {
+        const user = await getUser(resp.result.session.user_id)
+        dispatch((tree) => {
+          tree.select('currentUser').set(user)
+        })
+        dispatch(addNotification('Вход выполнен успешно!'))
+      }
+      setCurrentUser()
     }
 
     for (let fieldName in registerErrors) {
@@ -125,6 +140,8 @@ export default function LoginActionsModal() {
         case 'password':
           setRegisterPasswordErrors(errors)
           break
+        case 'invite':
+          setRegisterInviteErrors(errors)
       }
     }
   }
@@ -184,6 +201,15 @@ export default function LoginActionsModal() {
             style={{ color: 'white' }}
           />
           <div styleName="fieldErrors">{registerPasswordErrors}</div>
+          <Input
+            type="text"
+            placeholder="Код инвайта"
+            accent
+            value={registerTexts.invite}
+            onChange={(e) => updateText('register', 'invite', e.target.value)}
+            style={{ color: 'white' }}
+          />
+          <div styleName="fieldErrors">{registerInviteErrors}</div>
           <Button
             style={{ marginTop: '16px' }}
             accent

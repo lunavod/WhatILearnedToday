@@ -3,13 +3,13 @@
 import React, { useState } from 'react'
 import { useBranch } from 'baobab-react/hooks'
 
-import Button from '../Button'
-import PostForm from '../PostForm'
-import Confirm from '../Confirm'
-import PostPreview from '../PostPreview'
+import Button from '../../Button'
+import PostForm from '../../PostForm'
+import Confirm from '../../Confirm'
+import PostPreview from '../../PostPreview'
 import Modal from '../Modal'
 
-import { addPost, getPosts } from '../../api'
+import { addPost, getPosts } from '../../../api'
 
 import styles from './styles.css'
 

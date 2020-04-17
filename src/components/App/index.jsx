@@ -5,11 +5,12 @@ import { useRoot } from 'baobab-react/hooks'
 import Sidebar from '../Sidebar'
 import Navbar from '../Navbar'
 import NotificationsList from '../NotificationsList'
-import LoginActionsModal from '../LoginActionsModal'
+import LoginActionsModal from '../modals/LoginActionsModal'
 
 import getRouteForUrl from '../../routing'
 
 import styles from './styles.css'
+import InvitesModal from '../modals/InvitesModal'
 
 export default function App({
   store,
@@ -41,6 +42,7 @@ export default function App({
         </div>
       </div>
       <LoginActionsModal />
+      <InvitesModal />
     </Root>
   )
 }

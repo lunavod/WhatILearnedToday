@@ -19,7 +19,12 @@ const initialData = {
         username: '',
         password: '',
         email: '',
+        invite: '',
       },
+    },
+    InvitesModal: {
+      isOpen: true,
+      invites: [],
     },
   },
   notifications: [],
@@ -30,7 +35,7 @@ const tree = new Baobab(initialData)
 const stored = [
   {
     path: ['logInData'],
-    name: 'log_in_datar',
+    name: 'log_in_data',
     duplicateToCookies: true,
   },
 ]

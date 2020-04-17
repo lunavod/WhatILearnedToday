@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { deletePost, getPosts } from '../../api'
 import { addNotification } from '../../actions/notifications'
 
-import EditPostModal from '../EditPostModal'
+import EditPostModal from '../modals/EditPostModal'
 import Confirm from '../Confirm'
 
 import styles from './styles.css'

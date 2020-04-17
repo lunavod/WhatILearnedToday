@@ -1,0 +1,89 @@
+.wrapper {
+    background: white;
+    border-radius: 15px;
+    padding: 24px;
+    /*min-height: 400px;*/
+    min-width: 500px;
+}
+
+.wrapper h1, .wrapper h2 {
+    font-weight: normal;
+}
+
+.invites {
+    max-height: 200px;
+    overflow-x: auto;
+}
+
+.invite {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(0,0,255, .2);
+}
+
+.invite:last-child {
+    border-bottom: 1px solid rgba(0,0,255, .2);
+}
+
+.invite:nth-child(odd) {
+    background: rgba(0,0,255, .01);
+}
+
+.invite .user {
+    width: 25%;
+}
+
+.invite .user a {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.invite .not_used {
+    font-size: .9em;
+    color: rgba(0,0,0,.8);
+}
+
+.invite .code {
+    color: rgba(0,0,0,.6);
+    cursor: pointer;
+    font-size: .8em;
+}
+
+.invite .copy {
+    color: var(--accent);
+    cursor: pointer;
+}
+
+.invite .top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+}
+
+.invite .bottom {
+    padding: 8px;
+    padding-top: 0px;
+    font-size: .9em;
+    /*background: rgba(0,0,255, .02);*/
+}
+
+.new_invite_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.new_invite_description {
+    width: calc(100% - 56px);
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.new_invite_description:focus {
+    outline: none;
+}

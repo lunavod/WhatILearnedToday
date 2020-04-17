@@ -4,21 +4,25 @@ import React, { Fragment } from 'react'
 import { useBranch } from 'baobab-react/hooks'
 
 import classNames from 'classnames'
+import { addNotification } from '../../actions/notifications'
 
 import styles from './styles.css'
 
 export default function Navbar() {
-  const { logInData, dispatch } = useBranch({
+  const { logInData, currentUser, dispatch } = useBranch({
     logInData: 'logInData',
+    currentUser: 'currentUser',
   })
 
   const logOut = () => {
     dispatch((tree) => {
       tree.select('logInData').set({ id: 0, loggedIn: false, apiKey: '' })
+      tree.select('currentUser').set({})
     })
+    dispatch(addNotification('Выход из аккаунта выполнен успешно'))
   }
 
-  const logIn = () => {
+  const openLogInModal = () => {
     dispatch((tree) => {
       tree.select('modals', 'LoginActions', 'isOpen').set(true)
     })
@@ -26,14 +30,17 @@ export default function Navbar() {
 
   const logged_items = (
     <Fragment>
-      <NavbarItem name="settings">Настройки</NavbarItem>
+      <NavbarItem name="settings" href={`/users/${currentUser.username}`}>
+        Профиль
+      </NavbarItem>
+      <NavbarItem name="invites">Управление инвайтами</NavbarItem>
       <NavbarItem onClick={logOut}>Выйти</NavbarItem>
     </Fragment>
   )
 
   const unlogged_items = (
     <Fragment>
-      <NavbarItem onClick={logIn}>Войти</NavbarItem>
+      <NavbarItem onClick={openLogInModal}>Войти</NavbarItem>
     </Fragment>
   )
 

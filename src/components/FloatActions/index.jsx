@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Fragment, useState } from 'react'
-import AddPostModal from '../../components/AddPostModal'
+import AddPostModal from '../modals/AddPostModal'
 
 import styles from './styles.css'
 

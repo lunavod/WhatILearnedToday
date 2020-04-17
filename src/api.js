@@ -8,6 +8,13 @@ declare var globalThis: {
   ENV: { API: string },
 }
 
+function encodeQueryData(data) {
+  const ret = []
+  for (let d in data)
+    ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]))
+  return ret.join('&')
+}
+
 async function POST(url: string, data?: any, signal: any): Promise<any> {
   if (globalThis.api_key) {
     data = {
@@ -38,10 +45,13 @@ async function GET(url: string, data?: any, signal: any): Promise<any> {
     }
   }
   console.log(chalk.greenBright(`API GET - ${globalThis.ENV.API + url}`))
-  const response = await fetch(globalThis.ENV.API + url, {
-    method: 'GET',
-    signal,
-  })
+  const response = await fetch(
+    globalThis.ENV.API + url + '?' + encodeQueryData(data),
+    {
+      method: 'GET',
+      signal,
+    }
+  )
 
   return await response.json()
 }
@@ -159,10 +169,11 @@ export async function login(username: string, password: string): Promise<any> {
 export async function register(
   username: string,
   email: string,
-  password: string
+  password: string,
+  invite_code: string
 ): Promise<any> {
   const resp = await POST('/users', {
-    user: { username, email, password },
+    user: { username, email, password, invite_code },
   })
 
   console.log('Register!', username, email, password, resp)
@@ -205,12 +216,6 @@ export async function editUser(
   original_description: string,
   avatar?: Blob
 ): Promise<any> {
-  // const resp1 = await PATCH(`/users/${id.toString()}`, {
-  //   user: { description, original_description },
-  // })
-  //
-  // if (resp1.code !== 200 || !avatar) return resp1
-
   const resp2 = await PATCH_FORM(`/users/${id.toString()}`, {
     'user[avatar]': avatar,
     'user[description]': description,
@@ -218,4 +223,41 @@ export async function editUser(
   })
 
   return resp2
+}
+
+export type User = {
+  id: number,
+  username: string,
+  email: string,
+  description: string,
+  original_description: string,
+  avatar_url: void | string,
+  invites?: Invite[],
+}
+
+export type Invite = {
+  id: number,
+  code: string,
+  description: string,
+  creator: User,
+  user: User,
+  created_at: string,
+  updated_at: string,
+}
+
+export async function getUserInvites(
+  id: number,
+  signal?: any
+): Promise<Invite[]> {
+  const user = await getUser(id, signal)
+  console.log(user)
+  return user.invites || []
+}
+
+export async function createInvite(
+  description?: string,
+  signal: any
+): Promise<Invite> {
+  const resp = await POST('/invites', { description }, signal)
+  return resp.result.invite
 }

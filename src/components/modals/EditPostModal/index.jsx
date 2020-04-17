@@ -4,13 +4,13 @@ import React, { useRef, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Modal from '../Modal'
-import PostForm from '../PostForm'
-import Button from '../Button'
-import Confirm from '../Confirm'
+import PostForm from '../../PostForm'
+import Button from '../../Button'
+import Confirm from '../../Confirm'
 
 import styles from './styles.css'
-import { editPost } from '../../api'
-import PostPreview from '../PostPreview'
+import { editPost } from '../../../api'
+import PostPreview from '../../PostPreview'
 
 export default function EditPostModal({
   post,
