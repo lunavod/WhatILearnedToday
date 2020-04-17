@@ -1,0 +1,121 @@
+<html>
+<head>
+    <title>Ошибка</title>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+    <div class="left">
+        <a href="/" class="logo">
+            <div class="first_line">WHAT I</div>
+            <div class="second_line">LEARNED</div>
+            <div class="third_line">TODAY</div>
+        </a>
+    </div>
+<div class="middle">
+    <div class="container">
+        <h1>Ошибка! D:</h1>
+        <p>Упс, кажется у нас все сломалось... >_></p>
+    </div>
+</div>
+    <div class="right"></div>
+</div>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    .logo {
+        color: #ffd324;
+        font-weight: bold;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .first_line {
+        font-size: 75px;
+        line-height: 1em;
+    }
+
+    .second_line {
+        font-size: 58.7px;
+        line-height: 1em;
+    }
+
+    .third_line {
+        font-size: 84px;
+        line-height: 1em;
+    }
+    body {
+        margin: 0 !important;
+        font-family: 'IBM Plex Sans', sans-serif;
+        background: #5672ff2b;
+    }
+
+    body::before {
+        content: ' ';
+        width: 100%;
+        height: calc(35% + 28px);
+        min-height: 330px;
+        /*background: var(--brand);*/
+        background: #6666ff;
+        display: block;
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        top: 0;
+        box-shadow: 0 0 6px 1px #6666ff;
+    }
+
+    .wrapper {
+        /* background: gray; */
+        font-family: var(--font-family);
+        display: flex;
+        padding: 32px;
+        font-size: 16px;
+    }
+
+    .left {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: 16px;
+        width: 100%;
+        max-width: 300px;
+        padding: 16px;
+        padding-top: 24px;
+        margin-top: 24px;
+    }
+
+    .middle {
+        margin: auto;
+        margin-top: calc(92px - 50px);
+        padding: 16px;
+        max-width: 900px;
+        display: inline-block;
+        margin-left: 16px;
+        margin-right: 16px;
+        width: 100%;
+        /*padding-top: 24px;*/
+        position: relative;
+    }
+
+    .container {
+        background: white;
+        border-radius: 15px;
+        padding: 16px;
+        width: 100%;
+    }
+
+    .right {
+        display: inline-block;
+        margin-right: auto;
+        margin-left: 16px;
+        width: 100%;
+        max-width: 300px;
+        padding: 16px;
+        margin-top: 36px;
+        /* background: blue; */
+    }
+</style>
+</body>
+</html>
