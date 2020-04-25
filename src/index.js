@@ -1,26 +1,20 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 import Baobab from 'baobab'
+import { stored } from './store'
 
 require('./utils/BakaEditor/src/index.js')
 import registerStored from './utils/BaobabStored'
 
 import App from './components/App'
 
-window.hydrateApp = initialState => {
+window.hydrateApp = (initialState) => {
   const tree = new Baobab(initialState)
-  const stored = [
-    {
-      path: ['logInData'],
-      name: 'log_in_data',
-      duplicateToCookies: true
-    }
-  ]
 
   registerStored(stored, tree)
 
   const watcher = tree.watch({
-    target: 'logInData'
+    target: 'logInData',
   })
 
   watcher.on('update', () => {

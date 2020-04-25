@@ -11,6 +11,8 @@ import getRouteForUrl from '../../routing'
 
 import styles from './styles.css'
 import InvitesModal from '../modals/InvitesModal'
+import FloatActions from '../FloatActions'
+import AddPostModal from '../modals/AddPostModal'
 
 export default function App({
   store,
@@ -43,6 +45,8 @@ export default function App({
       </div>
       <LoginActionsModal />
       <InvitesModal />
+      <AddPostModal />
+      <FloatActions />
     </Root>
   )
 }

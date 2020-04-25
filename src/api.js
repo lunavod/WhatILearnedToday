@@ -132,8 +132,6 @@ export async function login(username: string, password: string): Promise<any> {
     user: { username, password },
   })
 
-  console.log(resp)
-
   if (resp.code !== 200) return resp
 
   if (globalThis.localStorage) {
@@ -141,8 +139,6 @@ export async function login(username: string, password: string): Promise<any> {
     localStorage.setItem('session_id', resp.result.session.id)
     localStorage.setItem('current_user_id', resp.result.session.user_id)
   }
-
-  console.log('Login!', resp.result.key)
 
   return resp
 }
@@ -156,8 +152,6 @@ export async function register(
   const resp = await POST('/users', {
     user: { username, email, password, invite_code },
   })
-
-  console.log('Register!', username, email, password, resp)
 
   if (resp.code !== 201) return resp
 
@@ -231,7 +225,6 @@ export async function getUserInvites(
   signal?: any
 ): Promise<Invite[]> {
   const user = await getUser(id, signal)
-  console.log(user)
   return user.invites || []
 }
 

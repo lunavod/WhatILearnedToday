@@ -125,7 +125,7 @@ export default function EditProfile() {
                 {dateFormat(new Date(profile.created_at), 'dd.mm.yyyy')}
               </div>
             </div>
-            <div>
+            <div styleName="buttonsWrapper">
               <Button
                 circle
                 shadow

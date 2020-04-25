@@ -19,6 +19,11 @@ export default function Navbar() {
       tree.select('logInData').set({ id: 0, loggedIn: false, apiKey: '' })
       tree.select('currentUser').set({})
     })
+
+    localStorage.setItem('api_key', '')
+    localStorage.setItem('session_id', 0)
+    localStorage.setItem('current_user_id', 0)
+
     dispatch(addNotification('Выход из аккаунта выполнен успешно'))
   }
 
@@ -54,13 +59,12 @@ export default function Navbar() {
 
   return (
     <div styleName="navbar">
-      <div>{logged_in ? logged_items : unlogged_items}</div>
-      <div>
-        <NavbarItem name="posts" href="/">
-          Посты
-        </NavbarItem>
-        {/*<NavbarItem name="users">Пользователи</NavbarItem>*/}
-      </div>
+      {logged_in ? logged_items : unlogged_items}
+      <div styleName="separator" />
+      <NavbarItem name="posts" href="/">
+        Посты
+      </NavbarItem>
+      {/*<NavbarItem name="users">Пользователи</NavbarItem>*/}
     </div>
   )
 }

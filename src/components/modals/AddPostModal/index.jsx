@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useBranch } from 'baobab-react/hooks'
 
 import Button from '../../Button'
@@ -13,17 +13,43 @@ import { addPost, getPosts } from '../../../api'
 
 import styles from './styles.css'
 
-type PropTypes = {
-  close: () => {},
-}
+export default function AddPostModal() {
+  const { data, dispatch } = useBranch({
+    data: ['modals', 'AddPostModal'],
+  })
 
-export default function AddPost({ close }: PropTypes) {
-  const { dispatch } = useBranch({})
-  const [title, setTitle] = useState('')
-  const [text, setText] = useState('')
-  const [originalText, setOriginalText] = useState('')
+  const isOpen = data.isOpen
+
+  const [title, setTitle] = useState(data.title)
+  const [text, setText] = useState(data.text)
+  const [originalText, setOriginalText] = useState(data.originalText)
+
+  useEffect(() => {
+    if (
+      data.title === title &&
+      data.text === text &&
+      data.originalText === originalText
+    )
+      return
+
+    dispatch((tree) => {
+      tree.select('modals', 'AddPostModal').set({
+        isOpen,
+        title,
+        text,
+        originalText,
+      })
+    })
+  })
 
   const [isCloseConfirmActive, setIsCloseConfirmActive] = useState(false)
+  const [isResetConfirmActive, setIsResetConfirmActive] = useState(false)
+
+  const close = () => {
+    dispatch((tree) => {
+      tree.select(['modals', 'AddPostModal', 'isOpen']).set(false)
+    })
+  }
 
   const onPublishClick = async () => {
     await addPost(title, text, originalText)
@@ -35,7 +61,7 @@ export default function AddPost({ close }: PropTypes) {
     close()
   }
 
-  const onClose = () => {
+  const onCloseClick = () => {
     if (!text.length) return close()
     setIsCloseConfirmActive(true)
   }
@@ -49,11 +75,31 @@ export default function AddPost({ close }: PropTypes) {
     setIsCloseConfirmActive(false)
   }
 
+  const onResetClick = () => {
+    if (!text.length && !title.length) return
+    setIsResetConfirmActive(true)
+  }
+
+  const onResetAccept = () => {
+    setTitle('')
+    setText('')
+    setOriginalText('')
+  }
+
+  const onResetDeny = () => {
+    setIsResetConfirmActive(false)
+  }
+
   return (
     <Modal
-      isOpen={true}
-      close={onClose}
-      style={{ width: '100%', maxWidth: '1832px' }}
+      isOpen={isOpen}
+      close={onCloseClick}
+      style={{
+        width: '100%',
+        maxWidth: '1832px',
+        minHeight: '200px',
+        height: '100%',
+      }}
     >
       <div styleName="wrapper">
         <div styleName="new">
@@ -65,7 +111,7 @@ export default function AddPost({ close }: PropTypes) {
               setText,
               originalText,
               setOriginalText,
-              prefix: `new_`,
+              prefix: 'new_',
             }}
           />
 
@@ -77,14 +123,39 @@ export default function AddPost({ close }: PropTypes) {
                 onDeny={onCloseDeny}
               />
             )}
+            {isResetConfirmActive && text.length && (
+              <Confirm
+                text="У вас есть несохраненные изменения. Вы уверены, что хотите начать заново?"
+                onAccept={onResetAccept}
+                onDeny={onResetDeny}
+              />
+            )}
           </div>
 
           <div styleName="actions">
             <Button
+              onClick={onCloseClick}
+              shadow
+              circle
+              accent
+              style={{ marginLeft: '12px' }}
+            >
+              <i className="fas fa-times" />
+            </Button>
+            <Button
+              onClick={onResetClick}
+              shadow
+              circle
+              accent
+              style={{ marginLeft: '12px' }}
+            >
+              <i className="fas fa-undo" />
+            </Button>
+            <Button
               onClick={onPublishClick}
               shadow
               circle
-              style={{ marginLeft: '24px' }}
+              style={{ marginLeft: '12px' }}
             >
               <i className="fas fa-check" />
             </Button>

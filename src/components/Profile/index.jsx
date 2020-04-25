@@ -41,9 +41,9 @@ export default function Profile() {
               {dateFormat(new Date(profile.created_at), 'dd.mm.yyyy')}
             </div>
           </div>
-          <div>
-            <span styleName="thumbsup">{'👍'}</span>
-          </div>
+          {/*<div>*/}
+          {/*  <span styleName="thumbsup">{'👍'}</span>*/}
+          {/*</div>*/}
         </div>
         <div
           styleName="bottom"

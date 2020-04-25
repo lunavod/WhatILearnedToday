@@ -14,6 +14,7 @@ app.use('/public', express.static('public'))
 app.use(cookieParser())
 
 app.get('*', async function (req, res) {
+  console.time('request')
   try {
     decache(require.resolve('./dist/serverBundle'))
     decache(require.resolve('react'))
@@ -81,6 +82,7 @@ app.get('*', async function (req, res) {
     res.sendFile(path.resolve('./src/templates/error.html'))
     return
   }
+  console.timeEnd('request')
 })
 
 function startServer() {

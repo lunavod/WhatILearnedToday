@@ -1,6 +1,5 @@
 .wrapper {
   display: flex;
-  width: 700px;
   /* height: 200px; */
   position: relative;
   border-radius: 15px;
@@ -47,4 +46,27 @@
   color: #ff8e8e;
   margin-bottom: 4px;
   font-size: 0.8em;
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    flex-direction: column;
+    max-height: 95%;
+    overflow-x: auto;
+  }
+
+  .left, .right {
+    width: 100%;
+    padding: 32px;
+  }
+
+  .right {
+    clip-path: none;
+    margin: 0;
+    overflow-x: auto;
+  }
+
+  .close {
+    color: var(--brand);
+  }
 }

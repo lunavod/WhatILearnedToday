@@ -26,10 +26,6 @@ export default function EditPostModal({
   const [isCloseConfirmActive, setIsCloseConfirmActive] = useState(false)
   const [isResetConfirmActive, setIsResetConfirmActive] = useState(false)
 
-  const onResetClick = () => {
-    setIsResetConfirmActive(true)
-  }
-
   const onPublishClick = async () => {
     console.log(originalText)
     await editPost(post.id, title, text, originalText)
@@ -42,7 +38,7 @@ export default function EditPostModal({
     location.reload()
   }
 
-  const onClose = () => {
+  const onCloseClick = () => {
     if (text === post.text) return close()
     setIsCloseConfirmActive(true)
   }
@@ -54,6 +50,11 @@ export default function EditPostModal({
 
   const onCloseDeny = () => {
     setIsCloseConfirmActive(false)
+  }
+
+  const onResetClick = () => {
+    if (text === post.text && title === post.title) return
+    setIsResetConfirmActive(true)
   }
 
   const onResetAccept = () => {
@@ -70,8 +71,13 @@ export default function EditPostModal({
   return (
     <Modal
       isOpen={true}
-      close={onClose}
-      style={{ width: '100%', maxWidth: '1832px' }}
+      close={onCloseClick}
+      style={{
+        width: '100%',
+        maxWidth: '1832px',
+        minHeight: '200px',
+        height: '100%',
+      }}
     >
       <div styleName="wrapper">
         <div styleName="edit">
@@ -88,7 +94,7 @@ export default function EditPostModal({
           />
 
           <div styleName="confirmations">
-            {isResetConfirmActive && text !== post.text && (
+            {isResetConfirmActive && (
               <Confirm
                 text="У вас есть несохраненные изменения. Вы уверены, что хотите их отменить?"
                 onAccept={onResetAccept}
@@ -105,14 +111,23 @@ export default function EditPostModal({
           </div>
 
           <div styleName="actions">
-            <Button onClick={onResetClick} shadow accent circle>
+            <Button onClick={onCloseClick} shadow accent circle>
+              <i className="fas fa-times" />
+            </Button>
+            <Button
+              onClick={onResetClick}
+              shadow
+              accent
+              circle
+              style={{ marginLeft: '12px' }}
+            >
               <i className="fas fa-undo" />
             </Button>
             <Button
               onClick={onPublishClick}
               shadow
               circle
-              style={{ marginLeft: '24px' }}
+              style={{ marginLeft: '12px' }}
             >
               <i className="fas fa-check" />
             </Button>

@@ -1,3 +1,13 @@
+:root {
+  --actions-block-size: 54px;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --actions-block-size: 28px;
+  }
+}
+
 .post {
   display: block;
   color: black;
@@ -10,12 +20,14 @@
 
 .post header {
   display: flex;
+  align-items: center;
 }
 
 .avatar {
-  width: 54px;
-  height: 54px;
+  width: var(--actions-block-size);
+  height: var(--actions-block-size);
   border-radius: 50%;
+  margin-right: 16px;
 }
 
 .top_info_wrapper {
@@ -23,7 +35,6 @@
   flex-direction: column;
   height: 48px;
   justify-content: center;
-  margin-left: 16px;
 }
 
 .title {
@@ -44,12 +55,12 @@
 .actions {
   display: inline-flex;
   margin-left: auto;
-  height: 54px;
+  height: var(--actions-block-size);
 }
 
 .actions a {
-  width: 54px;
-  height: 54px;
+  width: var(--actions-block-size);
+  height: var(--actions-block-size);
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -62,4 +73,28 @@
   padding-top: 24px;
   line-height: 1.5em;
   font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  .post {
+    margin-bottom: 24px;
+  }
+  .avatar {
+    display: none;
+  }
+
+  .actions {
+    height: auto;
+    width: var(--actions-block-size);
+    flex-direction: column;
+  }
+
+  .actions a {
+    margin-left: 0;
+    margin-top: 6px;
+  }
+
+  .actions a:first-child {
+    margin-top: 0;
+  }
 }

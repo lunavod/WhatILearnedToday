@@ -147,7 +147,11 @@ export default function LoginActionsModal() {
   }
 
   return (
-    <Modal isOpen={isOpen} close={onCloseClick}>
+    <Modal
+      isOpen={isOpen}
+      close={onCloseClick}
+      style={{ width: '100%', maxWidth: '700px', padding: 0 }}
+    >
       <div styleName="wrapper">
         <div styleName="left">
           <h2>Вход</h2>

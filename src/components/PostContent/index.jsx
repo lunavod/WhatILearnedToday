@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 
 import Worker from '../../utils/highlight.worker'
 
@@ -10,18 +10,37 @@ type PropTypes = {
   content: string,
 }
 
+function checkArrayEquality(a: Array<any>, b: Array<any>) {
+  if (a.length !== b.length) return false
+  return !a.filter((el) => b.indexOf(el) < 0).length
+}
+
 export default function PostContent({ content }: PropTypes) {
   const contentRef = useRef()
 
+  const [codeNodes, setCodeNodes] = useState([])
+
   useEffect(() => {
     const wrapper = contentRef.current
-    wrapper.querySelectorAll('.code').forEach((el) => {
-      const worker = new Worker('worker.js')
-      worker.onmessage = (event) => {
-        el.innerHTML = event.data
+    const timerId = setInterval(() => {
+      const newNodes = Array.from(wrapper.querySelectorAll('.code'))
+      if (
+        !checkArrayEquality(
+          codeNodes,
+          newNodes.map((node) => node.innerText)
+        )
+      ) {
+        newNodes.forEach((el) => {
+          const worker = new Worker('worker.js')
+          worker.onmessage = (event) => {
+            el.innerHTML = event.data.replace(/\n/gm, '<br/>')
+          }
+          worker.postMessage(el.innerText)
+        })
+        setCodeNodes(newNodes.map((node) => node.innerText))
       }
-      worker.postMessage(el.innerHTML.replace(/<br>/gm, '\n'))
-    })
+    }, 10)
+    return () => clearInterval(timerId)
   })
 
   return (

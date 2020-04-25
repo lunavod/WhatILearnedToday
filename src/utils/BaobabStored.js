@@ -12,19 +12,20 @@ import Cookies from 'js-cookie'
  * @param {object} tree Baobab tree
  */
 export default function registerStored(stored, tree) {
-  forEach(stored, options => {
+  forEach(stored, (options) => {
     if (isArray(options))
       options = {
-        path: options
+        path: options,
       }
-    if (!options.name) options.name = options.path.join('.')
+    if (!options.name) options.name = options.path.join('__')
 
+    console.log(options)
     const watcher = tree.watch({
-      target: options.path
+      target: options.path,
     })
 
     let val = storage.get(`__stored_${options.name}`, {
-      model: options.model
+      model: options.model,
     })
 
     if (val) {
@@ -43,9 +44,9 @@ export default function registerStored(stored, tree) {
         Cookies.set(`__stored_${options.name}`, JSON.stringify(val))
     })
 
-    storage.listenChange(`__stored_${options.name}`, val => {
+    storage.listenChange(`__stored_${options.name}`, (val) => {
       val = storage.get(`__stored_${options.name}`, {
-        model: true
+        model: true,
       })
       if (
         !isEqual(

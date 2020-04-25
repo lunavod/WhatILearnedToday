@@ -55,7 +55,11 @@ export default function InvitesModal() {
   }
 
   return (
-    <Modal isOpen={isOpen} close={close}>
+    <Modal
+      isOpen={isOpen}
+      close={close}
+      style={{ width: '100%', maxWidth: '500px' }}
+    >
       <div styleName="wrapper">
         <h1>Список инвайтов:</h1>
         <div styleName="invites">

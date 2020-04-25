@@ -15,6 +15,7 @@ body {
   --font-family: 'IBM Plex Sans', sans-serif;
   --brand: #5757ff;
   --accent: #ffd324;
+  --mobile-width: 600px;
 }
 
 * {
@@ -89,6 +90,42 @@ body {
   margin: 0 auto;
 }
 
-:global div.empty {
-  height: 1.5em;
+@media (max-width: 600px) {
+  .wrapper {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .wrapper::before {
+    top: calc(28px * 2);
+  }
+
+  .left {
+    padding-top: calc(28px * 2 + 16px);
+    margin: auto;
+    /*max-width: 100%;*/
+  }
+
+  .middle {
+    margin: 0;
+    padding: 0;
+  }
+
+  .right {
+    display: none;
+  }
+}
+
+@media (max-width: 1400px) and (min-width: 600px) {
+  .left {
+    display: none;
+  }
+
+  .right {
+    display: none;
+  }
+  .middle {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
