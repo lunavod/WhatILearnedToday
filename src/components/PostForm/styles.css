@@ -22,3 +22,11 @@
 .title:focus {
   outline: none;
 }
+
+.wrapper baka-editor {
+  height: calc(100% - 56px);
+}
+
+.wrapper baka-editor :global(#editor) {
+  padding-bottom: 64px;
+}

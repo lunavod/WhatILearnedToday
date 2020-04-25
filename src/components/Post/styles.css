@@ -16,6 +16,12 @@
   border-radius: 15px;
   margin-bottom: 42px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.19);
+  position: relative;
+}
+
+.long {
+  max-height: 450px;
+  overflow: hidden;
 }
 
 .post header {
@@ -71,8 +77,23 @@
 
 .content {
   padding-top: 24px;
-  line-height: 1.5em;
-  font-size: 18px;
+}
+
+.open_full {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 64px;
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 24%, rgba(255,255,255,0.9220063025210083) 67%, rgba(255,255,255,0) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 1.1em;
+  color: var(--brand);
+  padding-bottom: 12px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {

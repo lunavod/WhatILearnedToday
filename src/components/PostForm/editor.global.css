@@ -130,6 +130,8 @@
     /*border-radius: 0px var(--border-radius) var(--border-radius) 0;*/
     border: 1px solid transparent;
     transition: border-color 0.2s;
+    font-size: 18px;
+    line-height: 1.5em;
 }
 
 #editor {

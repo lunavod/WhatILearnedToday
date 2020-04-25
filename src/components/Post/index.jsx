@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { deletePost, getPosts } from '../../api'
 import { addNotification } from '../../actions/notifications'
@@ -10,6 +10,7 @@ import Confirm from '../Confirm'
 
 import styles from './styles.css'
 import { useBranch } from 'baobab-react/hooks'
+import classNames from 'classnames'
 
 import PostContent from '../PostContent'
 
@@ -45,6 +46,8 @@ export default function Post({ post }) {
     setIsConfirmShown(false)
   }
 
+  const isLong = post.text.length > 700
+
   return (
     <Fragment>
       {isConfirmShown && (
@@ -54,7 +57,12 @@ export default function Post({ post }) {
           onDeny={onDeleteDeny}
         />
       )}
-      <div styleName="post">
+      <div
+        className={classNames({
+          [styles.post]: true,
+          [styles.long]: isLong,
+        })}
+      >
         <header>
           <img
             styleName="avatar"
@@ -84,8 +92,9 @@ export default function Post({ post }) {
           </div>
         </header>
         <div styleName="content">
-          <PostContent content={post.text} />
+          <PostContent content={isLong ? post.text.slice(0, 800) : post.text} />
         </div>
+        {isLong && <div styleName="open_full">Открыть полностью</div>}
       </div>
       {isEditActive && (
         <EditPostModal post={post} close={() => setIsEditActive(false)} />
