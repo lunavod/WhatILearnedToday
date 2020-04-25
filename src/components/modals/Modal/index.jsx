@@ -9,9 +9,16 @@ type PropTypes = {
   isOpen: boolean,
   close: () => {},
   style?: {},
+  wrapperStyle?: {},
 }
 
-export default function Modal({ children, isOpen, close, style }: PropTypes) {
+export default function Modal({
+  children,
+  isOpen,
+  close,
+  style,
+  wrapperStyle,
+}: PropTypes) {
   if (!isOpen) return <Fragment />
 
   const wrapperRef = useRef()
@@ -28,7 +35,7 @@ export default function Modal({ children, isOpen, close, style }: PropTypes) {
   })
 
   return (
-    <div styleName="wrapper" ref={wrapperRef}>
+    <div styleName="wrapper" ref={wrapperRef} style={wrapperStyle}>
       <div styleName="container" style={style}>
         {children}
       </div>

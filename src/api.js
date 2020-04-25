@@ -127,6 +127,13 @@ export async function getPosts(): Promise<Array<any>> {
   return (await GET('/posts')).posts
 }
 
+export async function getPost(id: number): Promise<any> {
+  const resp = await GET(`/posts/${id}`)
+  if (resp.code === 404) throw 'NotFound'
+  console.log(resp)
+  return resp.result.post
+}
+
 export async function login(username: string, password: string): Promise<any> {
   const resp = await POST('/sessions', {
     user: { username, password },

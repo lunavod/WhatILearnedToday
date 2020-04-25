@@ -32,6 +32,10 @@ const initialData = {
       text: '',
       originalText: '',
     },
+    ShowPostModal: {
+      isOpen: false,
+      post: {},
+    },
   },
   notifications: [],
 }

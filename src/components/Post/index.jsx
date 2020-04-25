@@ -14,7 +14,7 @@ import classNames from 'classnames'
 
 import PostContent from '../PostContent'
 
-export default function Post({ post }) {
+export default function Post({ post, full }: { post: any, full: boolean }) {
   const { dispatch, loggedIn } = useBranch({
     loggedIn: ['logInData', 'loggedIn'],
   })
@@ -46,7 +46,7 @@ export default function Post({ post }) {
     setIsConfirmShown(false)
   }
 
-  const isLong = post.text.length > 700
+  const isLong = !full && post.text.length > 700
 
   return (
     <Fragment>
@@ -73,7 +73,9 @@ export default function Post({ post }) {
             }
           />
           <div styleName="top_info_wrapper">
-            <div styleName="title">{post.title}</div>
+            <a href={`/posts/${post.id}`} styleName="title">
+              <h1>{post.title}</h1>
+            </a>
             <a href={`/users/${user.username}`} styleName="username">
               {user.username}
             </a>
@@ -94,7 +96,11 @@ export default function Post({ post }) {
         <div styleName="content">
           <PostContent content={isLong ? post.text.slice(0, 800) : post.text} />
         </div>
-        {isLong && <div styleName="open_full">Открыть полностью</div>}
+        {isLong && (
+          <a href={`/posts/${post.id}`} styleName="open_full">
+            Открыть полностью
+          </a>
+        )}
       </div>
       {isEditActive && (
         <EditPostModal post={post} close={() => setIsEditActive(false)} />

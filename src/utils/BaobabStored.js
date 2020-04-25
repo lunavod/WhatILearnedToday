@@ -19,7 +19,6 @@ export default function registerStored(stored, tree) {
       }
     if (!options.name) options.name = options.path.join('__')
 
-    console.log(options)
     const watcher = tree.watch({
       target: options.path,
     })

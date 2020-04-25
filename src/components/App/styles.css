@@ -11,6 +11,13 @@ body {
   background: #5672ff2b;
 }
 
+:global(body.no-scroll) {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
 :root {
   --font-family: 'IBM Plex Sans', sans-serif;
   --brand: #5757ff;

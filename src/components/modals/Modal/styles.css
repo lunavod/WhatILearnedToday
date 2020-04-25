@@ -9,6 +9,7 @@
   z-index: 8000;
   justify-content: center;
   align-items: center;
+  overflow-x: auto;
 }
 
 .container {

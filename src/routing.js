@@ -2,6 +2,7 @@
 import * as IndexController from './controllers/IndexController'
 import * as ProfileController from './controllers/ProfileController'
 import * as NotFoundController from './controllers/NotFoundController'
+import * as PostController from './controllers/PostController'
 import { getUser } from './api'
 
 const defaultController = {
@@ -18,6 +19,7 @@ const defaultController = {
 const routing = {
   '/$': IndexController,
   '/users/(.+)': ProfileController,
+  '/posts/(.+)': PostController,
 
   '404': NotFoundController,
 }
