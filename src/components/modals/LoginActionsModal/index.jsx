@@ -44,7 +44,6 @@ export default function LoginActionsModal() {
   const onLoginClick = async () => {
     const resp = await login(logInTexts.username, logInTexts.password)
     const logInErrors = resp.errors
-    console.log(resp)
 
     setLogInUsernameErrors([])
     setLogInPasswordErrors([])

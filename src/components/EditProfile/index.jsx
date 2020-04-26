@@ -17,6 +17,8 @@ export default function EditProfile() {
     profile: 'profile',
   })
 
+  if (!profile) return <Fragment />
+
   const editorRef = useRef()
   const [description, setDescription] = useState(profile.description || '')
   const [originalDescription, setOriginalDescription] = useState(
@@ -107,9 +109,7 @@ export default function EditProfile() {
                 reader.readAsDataURL(files.dataTransfer.files[0])
                 reader.onload = function (e) {
                   setAvatarURL(e.target.result)
-                  console.log(e.target.result)
                 }
-                console.log(files.dataTransfer.files[0])
               }}
             >
               Загрузить аватар

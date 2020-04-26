@@ -1,7 +1,6 @@
 // @flow
 
-import React, { useRef, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { Fragment, useRef, useEffect, useState } from 'react'
 
 import Modal from '../Modal'
 import PostForm from '../../PostForm'
@@ -11,14 +10,18 @@ import Confirm from '../../Confirm'
 import styles from './styles.css'
 import { editPost } from '../../../api'
 import PostPreview from '../../PostPreview'
+import { useBranch } from 'baobab-react/hooks'
 
-export default function EditPostModal({
-  post,
-  close,
-}: {
-  post: { title: string, text: string, original_text: string, id: number },
-  close: () => {},
-}) {
+type PropTypes = {}
+
+export default function EditPostModal() {
+  const { post, isOpen, dispatch } = useBranch({
+    post: ['modals', 'EditPostModal', 'post'],
+    isOpen: ['modals', 'EditPostModal', 'isOpen'],
+  })
+
+  // if (!post) return <Fragment />
+
   const [title, setTitle] = useState(post.title)
   const [text, setText] = useState(post.text)
   const [originalText, setOriginalText] = useState(post.original_text)
@@ -26,8 +29,21 @@ export default function EditPostModal({
   const [isCloseConfirmActive, setIsCloseConfirmActive] = useState(false)
   const [isResetConfirmActive, setIsResetConfirmActive] = useState(false)
 
+  useEffect(() => {
+    setTitle(post.title)
+    setText(post.text)
+    setOriginalText(post.original_text)
+  }, [post.title, post.original_text, post.text])
+
+  if (!originalText) return <Fragment />
+
+  const close = () => {
+    dispatch((tree) => {
+      tree.select('modals', 'EditPostModal', 'isOpen').set(false)
+    })
+  }
+
   const onPublishClick = async () => {
-    console.log(originalText)
     await editPost(post.id, title, text, originalText)
 
     setTitle('')
@@ -35,7 +51,7 @@ export default function EditPostModal({
     setOriginalText('')
 
     close()
-    location.reload()
+    window.Router.reload()
   }
 
   const onCloseClick = () => {
@@ -70,7 +86,7 @@ export default function EditPostModal({
 
   return (
     <Modal
-      isOpen={true}
+      isOpen={isOpen}
       close={onCloseClick}
       style={{
         width: '100%',
@@ -141,5 +157,3 @@ export default function EditPostModal({
     </Modal>
   )
 }
-
-EditPostModal.propTypes = {}

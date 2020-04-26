@@ -22,6 +22,8 @@ export default function Profile() {
     profile: ['profile'],
   })
 
+  if (!profile) return <Fragment />
+
   return (
     <div styleName="wrapper">
       <img

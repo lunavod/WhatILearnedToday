@@ -13,9 +13,8 @@
   <body>
     <div id="react_container"><%= dehydratedContent %></div>
   </body>
-  <script>
-      globalThis.ENV = {API: '<%= process.env.API %>'}
-      globalThis.pathname = '<%= pathname %>'
+  <script id="starter">
+    globalThis.ENV = {API: '<%= process.env.API %>'}
     const initialState = <%= dehydratedState %>
     window.hydrateApp(initialState)
   </script>

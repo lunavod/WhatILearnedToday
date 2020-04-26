@@ -16,6 +16,8 @@ export function Controller() {
     profile: 'profile',
   })
 
+  if (!profile) return <Fragment />
+
   return (
     <Fragment>
       {currentUser && currentUser.id === profile.id ? (

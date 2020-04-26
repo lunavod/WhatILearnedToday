@@ -7,6 +7,7 @@ import classNames from 'classnames'
 import { addNotification } from '../../actions/notifications'
 
 import styles from './styles.css'
+import Link from '../Link'
 
 export default function Navbar() {
   const { logInData, currentUser, dispatch } = useBranch({
@@ -84,7 +85,7 @@ function NavbarItem({
     navbarItem: ['navbarItem'],
   })
   return (
-    <a
+    <Link
       href={href || '#'}
       onClick={onClick}
       className={classNames({
@@ -93,6 +94,6 @@ function NavbarItem({
       })}
     >
       {children}
-    </a>
+    </Link>
   )
 }

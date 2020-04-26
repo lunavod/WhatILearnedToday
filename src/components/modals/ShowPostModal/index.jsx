@@ -9,19 +9,24 @@ import Modal from '../Modal'
 import Post from '../../Post'
 
 export default function ShowPostModal() {
-  const { post } = useBranch({
+  const { post, dispatch } = useBranch({
     post: ['modals', 'ShowPostModal', 'post'],
   })
 
   if (!post) return <Fragment />
 
+  const goBack = () => {
+    window.Router.goTo('/')
+    dispatch((tree) => {
+      tree.select('modals', 'ShowPostModal', 'isOpen').set(false)
+    })
+  }
+
   return (
     <Modal
-      close={() => {
-        location.pathname = '/'
-      }}
+      close={goBack}
       isOpen={true}
-      style={{ maxWidth: '900px' }}
+      style={{ maxWidth: '900px', width: '100%' }}
       wrapperStyle={{ alignItems: 'flex-start', paddingTop: '80px' }}
     >
       <Post post={post} full />

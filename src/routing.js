@@ -24,7 +24,18 @@ const routing = {
   '404': NotFoundController,
 }
 
-export default function getRouteForUrl(url: string): any {
+type Route = {
+  Controller: React$Element,
+  loadData: (tree, data) => {},
+  data: Array<any>,
+  default: {
+    Controller: React$Element,
+    loadData: (tree, data) => {},
+    data: Array<any>,
+  },
+}
+
+export default function getRouteForUrl(url: string): Route {
   for (let pattern in routing) {
     const match = Array.from(url.match(new RegExp(pattern)) || [])
     if (!match.length) continue

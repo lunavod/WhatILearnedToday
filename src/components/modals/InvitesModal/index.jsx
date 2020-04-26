@@ -31,7 +31,6 @@ export default function InvitesModal() {
   useEffect(() => {
     const loadData = async () => {
       const newInvites = await getUserInvites(currentUser.id)
-      console.log(newInvites)
       dispatch((tree) => {
         tree.select(['modals', 'InvitesModal', 'invites']).set(newInvites || [])
       })

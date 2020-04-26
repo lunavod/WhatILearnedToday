@@ -36,6 +36,10 @@ const initialData = {
       isOpen: false,
       post: {},
     },
+    EditPostModal: {
+      isOpen: false,
+      post: {},
+    },
   },
   notifications: [],
 }

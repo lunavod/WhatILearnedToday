@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export function useObserver(ref, attributeNames, callback) {
   useEffect(() => {
@@ -21,4 +21,19 @@ export function useObserver(ref, attributeNames, callback) {
       observer.disconnect()
     }
   })
+}
+
+export function useRouter() {
+  const [url, setUrl] = useState(location.pathname)
+
+  useEffect(() => {
+    const onURLChange = (newURL) => {
+      setUrl(newURL)
+    }
+    window.Router.addEventListener('change', onURLChange)
+
+    return () => window.Router.removeEventListener('change', onURLChange)
+  })
+
+  return url
 }

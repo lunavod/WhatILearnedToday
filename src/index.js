@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom'
 import React from 'react'
 import Baobab from 'baobab'
 import { stored } from './store'
+import Router from './utils/router'
 
 require('./utils/BakaEditor/src/index.js')
 import registerStored from './utils/BaobabStored'
@@ -9,6 +10,8 @@ import registerStored from './utils/BaobabStored'
 import App from './components/App'
 
 window.hydrateApp = (initialState) => {
+  globalThis.Router = new Router()
+
   const tree = new Baobab(initialState)
 
   registerStored(stored, tree)
@@ -29,7 +32,6 @@ window.hydrateApp = (initialState) => {
     let isOpen = false
     Object.keys(modals).forEach((modalName) => {
       const modal = modals[modalName]
-      console.log(modal)
       if (modal.isOpen) isOpen = true
     })
 
@@ -51,4 +53,6 @@ window.hydrateApp = (initialState) => {
     <App store={tree} />,
     document.querySelector('#react_container')
   )
+
+  document.querySelector('script#starter').remove()
 }

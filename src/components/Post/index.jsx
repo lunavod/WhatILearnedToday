@@ -13,6 +13,7 @@ import { useBranch } from 'baobab-react/hooks'
 import classNames from 'classnames'
 
 import PostContent from '../PostContent'
+import Link from '../Link'
 
 export default function Post({ post, full }: { post: any, full: boolean }) {
   const { dispatch, loggedIn } = useBranch({
@@ -20,12 +21,16 @@ export default function Post({ post, full }: { post: any, full: boolean }) {
   })
 
   const user = post.creator || {}
-  const [isEditActive, setIsEditActive] = useState(false)
   const [isConfirmShown, setIsConfirmShown] = useState(false)
 
   const onEditClick = (e) => {
     e.preventDefault()
-    setIsEditActive(true)
+    dispatch((tree) => {
+      tree.select('modals', 'EditPostModal').set({
+        isOpen: true,
+        post,
+      })
+    })
   }
 
   const onDeleteClick = async (e) => {
@@ -73,12 +78,12 @@ export default function Post({ post, full }: { post: any, full: boolean }) {
             }
           />
           <div styleName="top_info_wrapper">
-            <a href={`/posts/${post.id}`} styleName="title">
+            <Link href={`/posts/${post.id}`} className={styles.title}>
               <h1>{post.title}</h1>
-            </a>
-            <a href={`/users/${user.username}`} styleName="username">
+            </Link>
+            <Link href={`/users/${user.username}`} className={styles.username}>
               {user.username}
-            </a>
+            </Link>
           </div>
           <div styleName="actions">
             {loggedIn && (
@@ -97,14 +102,11 @@ export default function Post({ post, full }: { post: any, full: boolean }) {
           <PostContent content={isLong ? post.text.slice(0, 800) : post.text} />
         </div>
         {isLong && (
-          <a href={`/posts/${post.id}`} styleName="open_full">
+          <Link href={`/posts/${post.id}`} className={styles.open_full}>
             Открыть полностью
-          </a>
+          </Link>
         )}
       </div>
-      {isEditActive && (
-        <EditPostModal post={post} close={() => setIsEditActive(false)} />
-      )}
     </Fragment>
   )
 }
