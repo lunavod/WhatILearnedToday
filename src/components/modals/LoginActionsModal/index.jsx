@@ -21,6 +21,10 @@ export default function LoginActionsModal() {
     registerTexts: ['modals', 'LoginActions', 'register'],
   })
 
+  globalThis.addNotification = (...args) => {
+    dispatch(addNotification(...args))
+  }
+
   const [logInUsernameErrors, setLogInUsernameErrors] = useState('')
   const [logInPasswordErrors, setLogInPasswordErrors] = useState('')
 

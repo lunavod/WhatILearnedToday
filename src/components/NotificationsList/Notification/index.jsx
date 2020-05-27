@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useBranch } from 'baobab-react/hooks'
@@ -6,18 +8,14 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
-export default function Notification({ data, tickTimer, close }) {
-  useEffect(() => {
-    let timerId = 0
-    const interval = () => {
-      if (data.timer > 0) tickTimer()
-      else close()
-    }
-    timerId = setInterval(interval, 1000)
-    return () => {
-      clearInterval(timerId)
-    }
-  })
+export default function Notification({
+  data,
+}: {
+  data: {
+    type: string,
+    title: string,
+  },
+}) {
   return (
     <div
       className={classNames({
