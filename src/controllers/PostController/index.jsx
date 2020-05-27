@@ -2,17 +2,21 @@
 
 import React, { Fragment } from 'react'
 
+import styles from './styles.css'
+import { getPost } from '../../api'
+import Post from '../../components/Post'
 import { useBranch } from 'baobab-react/hooks'
 
-import styles from './styles.css'
-import { getPost, getPosts } from '../../api'
-import Posts from '../../components/Posts'
-import ShowPostModal from '../../components/modals/ShowPostModal'
-
 export function Controller() {
+  const { post } = useBranch({
+    post: 'post',
+  })
+
+  if (!post) return <Fragment />
+
   return (
     <Fragment>
-      <ShowPostModal />
+      <Post full post={post} />
     </Fragment>
   )
 }
@@ -21,7 +25,6 @@ export async function loadData(tree, data) {
   tree.select('navbarItem').set('posts')
 
   const post = await getPost(data[1])
-  console.log('Post', post, data)
-  tree.select('modals', 'ShowPostModal').set({ isOpen: true, post })
+  tree.select('post').set(post)
   return true
 }

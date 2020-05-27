@@ -13,8 +13,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--accent);
-    box-shadow: 0 2px 8px #e0b300;
-    color: var(--brand);
+    background: var(--brand);
+    box-shadow: 0 3px 6px #5757ff;
+    color: white;
     cursor: pointer;
 }

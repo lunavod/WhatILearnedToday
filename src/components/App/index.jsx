@@ -28,16 +28,8 @@ export default function App({
       <div styleName="wrapper">
         <NotificationsList />
         <Navbar />
-        <div styleName="sidebar_left">
-          <Sidebar />
-        </div>
         <div styleName="content">
           <RouteRenderer pathname={pathname} />
-        </div>
-        <div styleName="sidebar_right">
-          <div styleName="neko_placeholder">
-            Тут будет неко с ноутбуком, но пока тут только я, Дио!
-          </div>
         </div>
       </div>
       <LoginActionsModal />

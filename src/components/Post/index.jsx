@@ -2,7 +2,7 @@
 
 import React, { Fragment, useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { deletePost, getPosts } from '../../api'
+import { deletePost } from '../../api'
 import { addNotification } from '../../actions/notifications'
 
 import EditPostModal from '../modals/EditPostModal'
@@ -40,18 +40,15 @@ export default function Post({ post, full }: { post: any, full: boolean }) {
 
   const onDeleteAccept = async () => {
     await deletePost(post.id)
-    const posts = await getPosts()
-    dispatch((tree) => {
-      tree.select('posts').set(posts)
-    })
     dispatch(addNotification('Пост удален!'))
+    window.Router.reload()
   }
 
   const onDeleteDeny = () => {
     setIsConfirmShown(false)
   }
 
-  const isLong = !full && post.text.length > 700
+  const isLong = !full && post.text.length > 1000
 
   return (
     <Fragment>
@@ -79,7 +76,9 @@ export default function Post({ post, full }: { post: any, full: boolean }) {
           />
           <div styleName="top_info_wrapper">
             <Link href={`/posts/${post.id}`} className={styles.title}>
-              <h1>{post.title}</h1>
+              <h1>
+                {post.title} #{post.id}
+              </h1>
             </Link>
             <Link href={`/users/${user.username}`} className={styles.username}>
               {user.username}
@@ -102,9 +101,9 @@ export default function Post({ post, full }: { post: any, full: boolean }) {
           <PostContent content={isLong ? post.text.slice(0, 800) : post.text} />
         </div>
         {isLong && (
-          <Link href={`/posts/${post.id}`} className={styles.open_full}>
-            Открыть полностью
-          </Link>
+          <div styleName="open_full">
+            <Link href={`/posts/${post.id}`}>Читать дальше</Link>
+          </div>
         )}
       </div>
     </Fragment>

@@ -34,7 +34,8 @@ export default function Navbar() {
     })
   }
 
-  const openInvitesModal = () => {
+  const openInvitesModal = (e) => {
+    e.preventDefault()
     dispatch((tree) => {
       tree.select('modals', 'InvitesModal', 'isOpen').set(true)
     })
@@ -46,12 +47,14 @@ export default function Navbar() {
         Профиль
       </NavbarItem>
       <NavbarItem onClick={openInvitesModal}>Управление инвайтами</NavbarItem>
+      <div styleName="separator" />
       <NavbarItem onClick={logOut}>Выйти</NavbarItem>
     </Fragment>
   )
 
   const unlogged_items = (
     <Fragment>
+      <div styleName="separator" />
       <NavbarItem onClick={openLogInModal}>Войти</NavbarItem>
     </Fragment>
   )
@@ -59,13 +62,19 @@ export default function Navbar() {
   const logged_in = !!logInData.id
 
   return (
-    <div styleName="navbar">
-      {logged_in ? logged_items : unlogged_items}
-      <div styleName="separator" />
-      <NavbarItem name="posts" href="/">
-        Посты
-      </NavbarItem>
-      {/*<NavbarItem name="users">Пользователи</NavbarItem>*/}
+    <div styleName="wrapper">
+      <div styleName="userbar">{logged_in ? logged_items : unlogged_items}</div>
+      <div styleName="navbar">
+        <Link href="/" className={styles.logo}>
+          WHAT I LEARNED TODAY
+        </Link>
+        <div styleName="separator" />
+        <div styleName="links">
+          <NavbarItem name="posts" href="/">
+            Посты
+          </NavbarItem>
+        </div>
+      </div>
     </div>
   )
 }

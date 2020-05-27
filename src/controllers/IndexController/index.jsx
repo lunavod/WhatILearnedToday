@@ -1,29 +1,26 @@
 import React, { Fragment } from 'react'
-import { useBranch } from 'baobab-react/hooks'
 import Posts from '../../components/Posts'
-import { getPosts, addPost } from '../../api'
+import { getPosts } from '../../api'
 
 import styles from './styles.css'
+import Pagination from '../../components/Pagination'
 
 export function Controller() {
-  const { loggedIn, dispatch } = useBranch({
-    loggedIn: ['logInData', 'loggedIn'],
-  })
-
-  const publish = async (title, text, original_text) => {}
-
   return (
     <Fragment>
       <Posts />
+      <Pagination />
     </Fragment>
   )
 }
 
-export async function loadData(tree) {
+export async function loadData(tree, data, params = {}) {
   tree.select('navbarItem').set('posts')
 
-  const posts = await getPosts()
+  const cursor = params.cursor || undefined
+  const { posts, pagination } = await getPosts(cursor)
   tree.select('posts').set(posts)
+  tree.select('pagination').set(pagination)
   return true
 }
 

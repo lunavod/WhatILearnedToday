@@ -58,6 +58,8 @@ app.get('*', async function (req, res) {
       pathname = `${error}`
     }
 
+    globalThis.location = { pathname }
+
     const dehydratedContent = ReactDOMServer.renderToString(
       React.createElement(App, { store: tree, pathname, route })
     )
@@ -82,6 +84,7 @@ app.get('*', async function (req, res) {
     res.sendFile(path.resolve('./src/templates/error.html'))
     return
   }
+
   console.timeEnd('request')
 })
 

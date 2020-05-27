@@ -1,5 +1,7 @@
 // @flow
 
+import encodeQueryData from './query'
+
 type EventName = 'change' | 'reload'
 
 export default class Router {
@@ -13,9 +15,17 @@ export default class Router {
     })
   }
 
-  goTo(url: string) {
-    window.history.pushState({}, '', url)
+  goTo(url: string, params: {}) {
+    window.history.pushState({ params }, '', url + encodeQueryData(params))
+    location.search = encodeQueryData(params)
     this.url = url
+    console.log(
+      '%c%s %c%s',
+      'color: blue;',
+      'NAVIGATED TO',
+      'color: green;',
+      url
+    )
     this.fireEvent('change', url)
   }
 
@@ -40,7 +50,6 @@ export default class Router {
 
   fireEvent(event: EventName, data) {
     if (!(event in this._listeners)) return
-    console.log('THERE ARE EVENTS')
     this._listeners[event].forEach((cb) => cb(data))
   }
 }

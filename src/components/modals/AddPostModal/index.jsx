@@ -9,7 +9,7 @@ import Confirm from '../../Confirm'
 import PostPreview from '../../PostPreview'
 import Modal from '../Modal'
 
-import { addPost, getPosts } from '../../../api'
+import { addPost } from '../../../api'
 
 import styles from './styles.css'
 
@@ -53,8 +53,7 @@ export default function AddPostModal() {
 
   const onPublishClick = async () => {
     await addPost(title, text, originalText)
-    const newPosts = await getPosts()
-    dispatch((tree) => tree.select('posts').set(newPosts))
+    window.Router.reload()
     setTitle('')
     setText('')
     setOriginalText('')

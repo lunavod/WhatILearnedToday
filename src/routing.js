@@ -36,6 +36,9 @@ type Route = {
 }
 
 export default function getRouteForUrl(url: string): Route {
+  console.log('Before', url)
+  url = url.slice(0, url.indexOf('?') < 0 ? url.length : url.indexOf('?'))
+  console.log('After', url)
   for (let pattern in routing) {
     const match = Array.from(url.match(new RegExp(pattern)) || [])
     if (!match.length) continue

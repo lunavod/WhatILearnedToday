@@ -1,6 +1,7 @@
 // @flow
 
 import chalk from 'chalk'
+import encodeQueryData from './utils/query'
 
 declare var globalThis: {
   api_key: string | void,
@@ -8,15 +9,43 @@ declare var globalThis: {
   ENV: { API: string },
 }
 
-function encodeQueryData(data) {
-  const ret = []
-  for (let d in data)
-    ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]))
-  return ret.join('&')
+export type User = {
+  id: number,
+  username: string,
+  email: string,
+  description: string,
+  original_description: string,
+  avatar_url: void | string,
+  invites?: Invite[],
+}
+
+export type Invite = {
+  id: number,
+  code: string,
+  description: string,
+  creator: User,
+  user: User,
+  created_at: string,
+  updated_at: string,
+}
+
+export type Post = {
+  id: number,
+  creator: User,
+  title: string,
+  text: string,
+  original_text: string,
+  created_at: string,
+  updated_at: string,
+}
+
+function log(method, url) {
+  console.log('%c%s', 'color: darkgreen;', `API ${method} - ${url}`)
 }
 
 async function POST(url: string, data?: any, signal: any): Promise<any> {
-  console.log(chalk.greenBright(`API POST - ${ENV.API + url}`))
+  // console.log(chalk.greenBright(`API POST - ${ENV.API + url}`))
+  log('POST', ENV.API + url)
   const response = await fetch(globalThis.ENV.API + url, {
     method: 'POST',
     headers: {
@@ -32,9 +61,9 @@ async function POST(url: string, data?: any, signal: any): Promise<any> {
 }
 
 async function GET(url: string, data?: any, signal: any): Promise<any> {
-  console.log(chalk.greenBright(`API GET - ${globalThis.ENV.API + url}`))
+  log('GET', ENV.API + url)
   const response = await fetch(
-    globalThis.ENV.API + url + '?' + encodeQueryData(data),
+    globalThis.ENV.API + url + encodeQueryData(data),
     {
       method: 'GET',
       headers: {
@@ -48,7 +77,7 @@ async function GET(url: string, data?: any, signal: any): Promise<any> {
 }
 
 async function DELETE(url: string, data?: any, signal: any): Promise<any> {
-  console.log(chalk.greenBright(`API DELETE - ${globalThis.ENV.API + url}`))
+  log('DELETE', ENV.API + url)
   const response = await fetch(globalThis.ENV.API + url, {
     method: 'delete',
     headers: {
@@ -63,7 +92,7 @@ async function DELETE(url: string, data?: any, signal: any): Promise<any> {
 }
 
 async function PATCH(url: string, data?: any, signal: any): Promise<any> {
-  console.log(chalk.greenBright(`API PATCH - ${globalThis.ENV.API + url}`))
+  log('PATCH', ENV.API + url)
   const response = await fetch(globalThis.ENV.API + url, {
     method: 'PATCH',
     headers: {
@@ -123,14 +152,26 @@ export async function editPost(
   })
 }
 
-export async function getPosts(): Promise<Array<any>> {
-  return (await GET('/posts')).posts
+export async function getPosts(
+  cursor: number,
+  limit: number
+): Promise<{
+  posts: Post[],
+  pagination: {
+    offset: number,
+    total: number,
+  },
+}> {
+  const data = {}
+  if (cursor) data['cursor'] = cursor
+  if (limit) data['limit'] = limit
+  const resp = await GET('/posts', { pagination: data })
+  return resp.result
 }
 
-export async function getPost(id: number): Promise<any> {
+export async function getPost(id: number): Promise<Post> {
   const resp = await GET(`/posts/${id}`)
   if (resp.code === 404) throw 'NotFound'
-  console.log(resp)
   return resp.result.post
 }
 
@@ -175,13 +216,19 @@ export async function getUser(id: number, signal: any): Promise<any> {
 
 export async function getUserPosts(
   username: string,
+  cursor: number,
+  limit: number,
   signal: any
 ): Promise<Array<any>> {
-  const resp = await GET(`/users/${username}/posts`, {}, signal)
+  const resp = await GET(
+    `/users/${username}/posts`,
+    { pagintation: { cursor, limit } },
+    signal
+  )
   if (resp.code !== 200) {
     throw 'NotFound'
   }
-  return resp.result.posts
+  return resp.result
 }
 
 export async function deletePost(id: number): Promise<void> {
@@ -205,26 +252,6 @@ export async function editUser(
   })
 
   return resp2
-}
-
-export type User = {
-  id: number,
-  username: string,
-  email: string,
-  description: string,
-  original_description: string,
-  avatar_url: void | string,
-  invites?: Invite[],
-}
-
-export type Invite = {
-  id: number,
-  code: string,
-  description: string,
-  creator: User,
-  user: User,
-  created_at: string,
-  updated_at: string,
 }
 
 export async function getUserInvites(
