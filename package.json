@@ -69,7 +69,7 @@
     "fitty": "^2.3.0",
     "highlight.js": "^9.18.1",
     "js-cookie": "^2.2.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "node-fetch": "^2.6.0",
     "nord-highlightjs": "^0.1.0",
     "react": "^16.13.0",
